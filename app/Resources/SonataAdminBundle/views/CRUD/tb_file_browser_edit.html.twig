@@ -1,0 +1,19 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(function(){
+
+            console.log('Custom JS');
+
+            $('.filebrowser').toolboxFilebrowser({
+                image_directory: '{{ admin.tbOptions.image_directory }}',
+                thumbWidth: {{ admin.tbOptions.thumbWidth }},
+                thumbHeight: {{ admin.tbOptions.thumbHeight }},
+                cropOptions: {{ admin.tbOptions.cropOptions|json_encode|raw }}
+            });
+        });
+    </script>
+{% endblock %}

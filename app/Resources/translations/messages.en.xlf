@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-04-13T15:41:24Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="fe8b1de201eeedd66e94b65d0e1910e6e2beea1b" resname="* -ով նշված դաշտերը պարտադիր լրացման ենթական են։">
+        <source>* -ով նշված դաշտերը պարտադիր լրացման ենթական են։</source>
+        <target state="new">Fields marked with * are required</target>
+        <jms:reference-file line="60">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="42">/../../../../../../../.././app/Resources/views/bank/bank_ewallets.html.twig</jms:reference-file>
+        <jms:reference-file line="72">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+        <jms:reference-file line="72">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+        <jms:reference-file line="46">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a89db5692c4f402f39cd29cb60de87c475e4bf6e" resname="ԱՆՀԱՏՆԵՐ">
+        <source>ԱՆՀԱՏՆԵՐ</source>
+        <target state="new">INDIVIDUALS</target>
+        <jms:reference-file line="34">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ca1b013625492c51b77efc91d02da816ae7d5a06" resname="Ամերիկյան Դոլլար">
+        <source>Ամերիկյան Դոլլար</source>
+        <target state="new">US Dollar</target>
+        <jms:reference-file line="92">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5fcaa149bd1f76291a1fd542603dcae3c157d7e3" resname="Ամիս">
+        <source>Ամիս</source>
+        <target state="new">Month</target>
+        <jms:reference-file line="42">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bd3f802975e4425abf05ba0a529f4efdf6d440cc" resname="Ամիսներ">
+        <source>Ամիսներ</source>
+        <target state="new">Months</target>
+        <jms:reference-file line="54">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+        <jms:reference-file line="85">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d4b58504d04c36e280b8bf49b52b8c0647af9475" resname="Ամսեկան տատանումը">
+        <source>Ամսեկան տատանումը</source>
+        <target state="new">Monthly Fluctuation</target>
+        <jms:reference-file line="403">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="494b8e447ca721dc133b3b8f23daa27e33977ad2" resname="Այլ Պայմաններ">
+        <source>Այլ Պայմաններ</source>
+        <target state="new">Other Conditions</target>
+        <jms:reference-file line="62">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="74b4e50e50a0cf10ecd03470b22b314063670bc4" resname="Այլ Փոխարժեքներ">
+        <source>Այլ Փոխարժեքներ</source>
+        <target state="new">Other Currencies</target>
+        <jms:reference-file line="51">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cd0c358b26d4d61823d23c30c1fbef50ea9bd63c" resname="Անվանում">
+        <source>Անվանում</source>
+        <target state="new">Title</target>
+        <jms:reference-file line="72">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="84">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="bf9ed0ad2fcbb51bf8e82812d7ccf92a2c8d911c" resname="Աշխ. ժամեր">
+        <source>Աշխ. ժամեր</source>
+        <target state="new">Work. Hours</target>
+        <jms:reference-file line="127">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="28">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8cfec37e623c9e7538904c1476d13f9335651ca7" resname="Ապրիլ">
+        <source>Ապրիլ</source>
+        <target state="new">Apr.</target>
+        <jms:reference-file line="129">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0a676de62ef30746e5ef19e7a4b07b64bbbc3642" resname="Առավելագույնը">
+        <source>Առավելագույնը</source>
+        <target state="new">Maximum</target>
+        <jms:reference-file line="373">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="152621eecf2c791b68447522a3e711ec79e8d579" resname="Առք">
+        <source>Առք</source>
+        <target state="new">Buy</target>
+        <jms:reference-file line="118">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="120">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="122">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="124">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="89bd2904086dc6ea94a0bffd363a3977fb1e19c5" resname="Ավանդ">
+        <source>Ավանդ</source>
+        <target state="new">Deposit</target>
+        <jms:reference-file line="38">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="49">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="44f11c966762709bf206da18f1fd30e807e1de3a" resname="Ավանդի արժույթը">
+        <source>Ավանդի արժույթը</source>
+        <target state="new">Deposit Currency</target>
+        <jms:reference-file line="47">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d21b0ffc8d8e7c572aa3c83d8925955250051874" resname="Ավանդի գումարը">
+        <source>Ավանդի գումարը</source>
+        <target state="new">Deposit Amount</target>
+        <jms:reference-file line="35">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f4738645795f46446054018fbf762328a5c3a767" resname="Արագություն">
+        <source>Արագություն</source>
+        <target state="new">Speed</target>
+        <jms:reference-file line="87">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8c0ecc9b6bd2ed38e8208a694b278d7db547783b" resname="Արժ.">
+        <source>Արժ.</source>
+        <target state="new">Cur.</target>
+        <jms:reference-file line="19">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="da51466c313a4fcd7bf6e0ef114b636f16848516" resname="Արժույթ">
+        <source>Արժույթ</source>
+        <target state="new">Currency</target>
+        <jms:reference-file line="88">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+        <jms:reference-file line="58">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9acb4cd9a7f40810f6e5a254ca49cbe3633696e5" resname="Արժույթը">
+        <source>Արժույթը</source>
+        <target state="new">Currency</target>
+        <jms:reference-file line="29">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="50">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f4c6bb772ad19c5cf7d97380958a58f799d4d8a6" resname="Արժույթի տատանումները">
+        <source>Արժույթի տատանումները</source>
+        <target state="new">Currency Fluctuations</target>
+        <jms:reference-file line="463">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="af78096ec4b5e09abba649d7bafda7eb37b67854" resname="Արտարժույթի Փոխարժեքները ՀՀ Բանկերում">
+        <source>Արտառժույթի Փոխարժեքները ՀՀ Բանկերում</source>
+        <target state="new">Exchange Rates In Armenian Banks</target>
+        <jms:reference-file line="68">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d46b5549f4576fd02e247384413343e0edc1dc53" resname="ԲԻԶՆԵՍ">
+        <source>ԲԻԶՆԵՍ</source>
+        <target state="new">BUSINESS</target>
+        <jms:reference-file line="45">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="df7d2ef497def3bc65f3c10f593f1b2ba7f0ff41" resname="Բանկ">
+        <source>Բանկ</source>
+        <target state="new">Bank</target>
+        <jms:reference-file line="71">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="53">/../../../../../../../.././app/Resources/views/bank/bank_ewallets.html.twig</jms:reference-file>
+        <jms:reference-file line="83">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+        <jms:reference-file line="83">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+        <jms:reference-file line="57">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+        <jms:reference-file line="111">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="400b7462aaa3c20e5a079094beec1a226f124e4b" resname="Բանկ Ինֆո">
+        <source>Բանկ Ինֆո</source>
+        <target state="new">Bank Info</target>
+        <jms:reference-file line="18">/../../../../../../../.././app/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="17">/../../../../../../../.././app/Resources/views/elements/meta.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../../../../../../../.././app/Resources/views/elements/meta.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="400b7462aaa3c20e5a079094beec1a226f124asd" resname="Այ Թի Կոմպլեքս ՍՊԸ">
+        <source>Այ Թի Կոմպլեքս ՍՊԸ</source>
+        <target state="new">I T Complex LLC</target>
+        <jms:reference-file line="5">/../../../../../../../.././app/Resources/views/elements/footer.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="400b7462aaa3c20e5a079094beec1a226fasdasd" resname="Կայքում տեղադրված բոլոր տվյալները վերցվում են համապատասխան ընկերությունների պաշտոնական կայքերից: Bankinfo.am-ը պատասխանատվություն չի կրում տվյալների հավաստիության և օգտագործման հնարավոր հետևանքների համար:">
+        <source>Կայքում տեղադրված բոլոր տվյալները վերցվում են համապատասխան ընկերությունների պաշտոնական կայքերից: Bankinfo.am-ը պատասխանատվություն չի կրում տվյալների հավաստիության և օգտագործման հնարավոր հետևանքների համար:</source>
+        <target state="new">The information placed in our website is taken from the corresponding companies’ official websites. Bankinfo.am is not responsible for  the possible results of using and data accuracy.</target>
+        <jms:reference-file line="5">/../../../../../../../.././app/Resources/views/elements/footer.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="400b7462aaa3c20e5a079094beec1a2asdasdasd" resname="Կայքի որևէ տեղեկատվության վերաբերյալ տարբեր լեզուներում անհամապատասխանության դեպքում, խնդրում ենք առաջնորդվել հայերեն տարբերակով: Բոլոր իրավունքները պաշտպանված են:">
+        <source>Կայքի որևէ տեղեկատվության վերաբերյալ տարբեր լեզուներում անհամապատասխանության դեպքում, խնդրում ենք առաջնորդվել հայերեն տարբերակով: Բոլոր իրավունքները պաշտպանված են:</source>
+        <target state="new">In case of inconsistencies between the information in different languages You need to be guided by Armenian version. All rights reserved.</target>
+        <jms:reference-file line="5">/../../../../../../../.././app/Resources/views/elements/footer.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="44fdf31d88fe46a6bca92ed91dcbce2f0f9ec951" resname="Բանկեր և մասնաճյուղեր">
+        <source>Բանկեր և մասնաճյուղեր</source>
+        <target state="new">Banks and Branches</target>
+        <jms:reference-file line="89">/../../../../../../../.././app/Resources/views/default/contact.html.twig</jms:reference-file>
+        <jms:reference-file line="4">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7980a5465574486bb472364cf8708b77f27ff00b" resname="Բանկոմատներ">
+        <source>Բանկոմատներ</source>
+        <target state="new">ATMs</target>
+        <jms:reference-file line="93">/../../../../../../../.././app/Resources/views/default/contact.html.twig</jms:reference-file>
+        <jms:reference-file line="5">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="68689a610c31c7920a12089d20dacefb2528c59b" resname="Բոլոր բանկերը, նրանց մասնաճյուղերը, բանկոմատները և վարկային կազմակերպությունները">
+        <source>Բոլոր բանկերը, նրանց մասնաճյուղերը, բանկոմատները և վարկային կազմակերպությունները</source>
+        <target state="new">All Banks, branches, ATMs and Credit Companies</target>
+        <jms:reference-file line="83">/../../../../../../../.././app/Resources/views/default/contact.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2d643e4ba4ca596f36ae97176766240053a0106d" resname="Բոլորը">
+        <source>Բոլորը</source>
+        <target state="new">All</target>
+        <jms:reference-file line="49">/../../../../../../../.././app/Resources/views/bank/bank_atms.html.twig</jms:reference-file>
+        <jms:reference-file line="49">/../../../../../../../.././app/Resources/views/bank/banks_and_branches.html.twig</jms:reference-file>
+        <jms:reference-file line="46">/../../../../../../../.././app/Resources/views/credit-company/list.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="859d2604fa1d4618cfe2db04cce01e5f05b6fe0b" resname="Արժեք">
+        <source>Արժեք</source>
+        <target state="new">Rate</target>
+        <jms:reference-file line="21">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+        <jms:reference-file line="38">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="77daf62e134cf6cb0c58bc676bc9120d35ae03b3" resname="Գործընկերներ">
+        <source>Գործընկերներ</source>
+        <target state="new">Partner</target>
+        <jms:reference-file line="47">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="733a37f0dd77da87c3d98a2bf2a14bb373207398" resname="Գումար">
+        <source>Գումար</source>
+        <target state="new">Amount</target>
+        <jms:reference-file line="47">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="89">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+        <jms:reference-file line="54">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6941c8a5c675c658af816a3f2502d7706f272208" resname="Դեկտ.">
+        <source>Դեկտ.</source>
+        <target state="new">Dec</target>
+        <jms:reference-file line="137">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7deb7cadfe7b2db8e66374144035099efa4e2beb" resname="Դիտել բոլորը">
+        <source>Դիտել բոլորը</source>
+        <target state="new">View all</target>
+        <jms:reference-file line="29">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="418657eff4fcd2934facab95c70a1847d2756f8b" resname="Դուք կաստանաք`">
+        <source>Դուք կաստանաք`</source>
+        <target state="new">You Will Get`</target>
+        <jms:reference-file line="83">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="80b3f8d5f1d6b41a0138a5aea08de3b7809bbaad" resname="Եկամտային Հարկ">
+        <source>Եկամտային Հարկ</source>
+        <target state="new">Income Tax</target>
+        <jms:reference-file line="89">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5b48d53ec32368191928e891f3e6cfa09213a999" resname="Եվրո">
+        <source>Եվրո</source>
+        <target state="new">Euro</target>
+        <jms:reference-file line="114">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="91a4ce3fd6c3427363bfe314dcf3f085ba22f7b3" resname="Երկիր">
+        <source>Երկիր</source>
+        <target state="new">Country</target>
+        <jms:reference-file line="29">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0f5754859a7f4c4f317ba0e3deb0fbb202577ae1" resname="Էլ. Հասցե՝">
+        <source>Էլ. Հասցե՝</source>
+        <target state="new">Email:</target>
+        <jms:reference-file line="39">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2a681e3996f344c0c72833d83d1407248b5528d6" resname="Էլ. դրամապանակ">
+        <source>Էլ. դրամապանակ</source>
+        <target state="new">E-wallet</target>
+        <jms:reference-file line="29">/../../../../../../../.././app/Resources/views/bank/bank_ewallets.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e068025e30cd2e6ee76a47634399e9694aed0bd4" resname="Ընդամենը՝">
+        <source>Ընդամենը՝</source>
+        <target state="new">Total:</target>
+        <jms:reference-file line="84">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="66f75f358bed1dabd12904ce30174f50944a3fc9" resname="Ընտրեք արժույթը">
+        <source>Ընտրեք արժույթը</source>
+        <target state="new">Choose currency</target>
+        <jms:reference-file line="53">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e8f7d8407918d9f078fa9efa925bd730d03f4d06" resname="Թարմ.">
+        <source>Թարմ.</source>
+        <target state="new">Update</target>
+        <jms:reference-file line="20">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="93a966b37ed5b183bbd098a78f2bfc320c3f8f36" resname="Թարմացում">
+        <source>Թարմացում</source>
+        <target state="new">Update</target>
+        <jms:reference-file line="37">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9465ffa59d193038dad7cd4776f53b7710c9a7ea" resname="Թարմացված է՝">
+        <source>Թարմացված է՝</source>
+        <target state="new">Updated:</target>
+        <jms:reference-file line="94">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="76">/../../../../../../../.././app/Resources/views/bank/bank_ewallets.html.twig</jms:reference-file>
+        <jms:reference-file line="108">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+        <jms:reference-file line="137">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5ddd2fccbb8c86211e478bbc42d954c3274430b3" resname="Ժամկետ">
+        <source>Ժամկետ</source>
+        <target state="new">Terms</target>
+        <jms:reference-file line="33">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f2101377a2c5bbf6e25133af4fb6ef50cb2e36dc" resname="Կ.Բ. Փոխարժեքներ">
+        <source>Կ.Բ. Փոխարժեքներ</source>
+        <target state="new">CBA Rates</target>
+        <jms:reference-file line="15">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0bcd6a73d6e8c9008141e2cd9755df9349b342fe" resname="Կամ">
+        <source>Կամ</source>
+        <target state="new">Or</target>
+        <jms:reference-file line="39">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="038cfdf496154b819a9fd8903449cf171842b213" resname="Կայք՝">
+        <source>Կայք՝</source>
+        <target state="new">Website:</target>
+        <jms:reference-file line="40">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="67fd71d935debf5d38733448cc14cfc53b6cd7ce" resname="Կանխ.">
+        <source>Կանխ.</source>
+        <target state="new">Advance</target>
+        <jms:reference-file line="86">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ad23533968ca20238b82f071e41ec19b192100c8" resname="Կանխիկացման միջնորդավճար %">
+        <source>Կանխիկացման միջնորդավճար %</source>
+        <target state="new">Cash Withdrawal %</target>
+        <jms:reference-file line="55">/../../../../../../../.././app/Resources/views/bank/bank_ewallets.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5bf100a95c8ed47af683f8bde18a49c5edb96c7e" resname="Կապ">
+        <source>Կապ</source>
+        <target state="new">Contact</target>
+        <jms:reference-file line="126">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="27">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6b86ffa49787c366f4f46b2ebddcd5e0e4184c53" resname="Կուտակած տոկոսագումար">
+        <source>Կուտակած տոկոսագումար</source>
+        <target state="new">Accumulated Interest</target>
+        <jms:reference-file line="88">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="68a4187499337b1345fe08b8f880e5b151bbf0e0" resname="ՀՀ">
+        <source>ՀՀ</source>
+        <target state="new">RA</target>
+        <jms:reference-file line="70">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="82">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+        <jms:reference-file line="82">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+        <jms:reference-file line="56">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+        <jms:reference-file line="123">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="24">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="77">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6f4dbb903d999f5c9b37709d1e6d29ec6287b2f7" resname="ՀՀ Կենտրոնական Բանկ">
+        <source>ՀՀ Կենտրոնական Բանկ</source>
+        <target state="new">Central Bank of Armenia</target>
+        <jms:reference-file line="34">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2597b1efeaedc60d973e59c0fbb2cf2618486574" resname="ՀՎՀՀ">
+        <source>ՀՎՀՀ</source>
+        <target state="new">TIN</target>
+        <jms:reference-file line="108">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c97fb9bcc55520425fadd6df35efbaefb80282ef" resname="Հաղորդագրություն">
+        <source>Հաղորդագրություն</source>
+        <target state="new">Message</target>
+        <jms:reference-file line="66">/../../../../../../../.././app/Resources/views/default/contact.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9d9abe411f2e92d1ecec31488cca8f917cb1c550" resname="Համալրման միջնորդավճար %">
+        <source>Համալրման միջնորդավճար %</source>
+        <target state="new">Replenishment fee %</target>
+        <jms:reference-file line="54">/../../../../../../../.././app/Resources/views/bank/bank_ewallets.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f22ab407dbd0febcbf7c83b7b26918f54ac2f123" resname="Համակարգ">
+        <source>Համակարգ</source>
+        <target state="new">Syetem</target>
+        <jms:reference-file line="50">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+        <jms:reference-file line="29">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4c104e47824786b56624d5440258ecca5c7af97e" resname="Հաշվել">
+        <source>Հաշվել</source>
+        <target state="new">Calculate</target>
+        <jms:reference-file line="62">/../../../../../../../.././app/Resources/views/default/calculator_credit.html.twig</jms:reference-file>
+        <jms:reference-file line="74">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="897a26cebb924e9772fb8202869cd8a801b3d9a3" resname="Հասցե">
+        <source>Հասցե</source>
+        <target state="new">Address</target>
+        <jms:reference-file line="125">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="26">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="78">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e3ae71d7ec8db1ce22f4ab372451b18420987946" resname="Հավասար մարում (Անուիտետ)">
+        <source>Հավասար մարում (Անուիտետ)</source>
+        <target state="new">Equal installments (annuity)</target>
+        <jms:reference-file line="54">/../../../../../../../.././app/Resources/views/default/calculator_credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0fcad10395865fcaef8c58290da604c349eb4cd7" resname="Հավասար վարկ (Նվազող %)">
+        <source>Հավասար վարկ (Նվազող %)</source>
+        <target state="new">Equal credit (Descending %)</target>
+        <jms:reference-file line="55">/../../../../../../../.././app/Resources/views/default/calculator_credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f88aeaaf6f79070c71ea5074aeb4ae04284b403e" resname="Հեռ.՝">
+        <source>Հեռ.՝</source>
+        <target state="new">Tel:</target>
+        <jms:reference-file line="37">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6c590e4b3fa0b3e7ee2fc6c17e163102d5fe0beb" resname="Հղում">
+        <source>Հղում</source>
+        <target state="new">Link</target>
+        <jms:reference-file line="74">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="56">/../../../../../../../.././app/Resources/views/bank/bank_ewallets.html.twig</jms:reference-file>
+        <jms:reference-file line="90">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+        <jms:reference-file line="88">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+        <jms:reference-file line="63">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="75eae54709682ea92ef0f791ec292dfaecd7a3aa" resname="Հոկտ.">
+        <source>Հոկտ.</source>
+        <target state="new">Oct.</target>
+        <jms:reference-file line="135">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="83499e4f0eefa0837ecd6fe8965453b977d0e6ce" resname="Հուլիս">
+        <source>Հուլիս</source>
+        <target state="new">Jul.</target>
+        <jms:reference-file line="132">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d0d3c527e2bd7323e9ed3571507d8d28051859e5" resname="Հունվ.">
+        <source>Հունվ.</source>
+        <target state="new">Jun.</target>
+        <jms:reference-file line="126">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+        <jms:reference-file line="131">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e80f1f57d0c771d5478b3c1205dc2616a97820b6" resname="Ձեր անունը">
+        <source>Ձեր անունը</source>
+        <target state="new">Your name</target>
+        <jms:reference-file line="53">/../../../../../../../.././app/Resources/views/default/contact.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="448c73b47918705a0801e943e0d5a8af09c7bf7b" resname="Ձեր էլ. հասցեն">
+        <source>Ձեր էլ. հասցեն</source>
+        <target state="new">Your email</target>
+        <jms:reference-file line="59">/../../../../../../../.././app/Resources/views/default/contact.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c38fdad0eac5b9c25abfd69ba7258401fcaaebee" resname="Մայիս">
+        <source>Մայիս</source>
+        <target state="new">May.</target>
+        <jms:reference-file line="130">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9289c9d1d737d7001586847fbc95f165f8e39496" resname="Մայր գումար">
+        <source>Մայր գումար</source>
+        <target state="new">Principal amount</target>
+        <jms:reference-file line="90">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c0af3fcbe82e63b5187deb8d59103b446cd248a1" resname="Մասնաճյուղ">
+        <source>Մասնաճյուղ</source>
+        <target state="new">Branch</target>
+        <jms:reference-file line="124">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="25">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="dfbc21353acbbd940add053acf9e38698ee9c0ac" resname="Մարտ">
+        <source>Մարտ</source>
+        <target state="new">Mar.</target>
+        <jms:reference-file line="128">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="23e3ea82ec07b953c84717b9fe98f72feb63ceba" resname="Մարման Տեսակ">
+        <source>Մարման Տեսակ</source>
+        <target state="new">Repayment Type</target>
+        <jms:reference-file line="52">/../../../../../../../.././app/Resources/views/default/calculator_credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c5984b94a750386e4d2ba4163cc27ddb7c519ea9" resname="Մաքս. Միջնորդ.">
+        <source>Մաքս. Միջնորդ.</source>
+        <target state="new">Max. Commission</target>
+        <jms:reference-file line="61">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="096f765864f02b3d6a917e19145188b4b7837f94" resname="Մին. Միջնորդ.">
+        <source>Մին. Միջնորդ.</source>
+        <target state="new">Min. Commission</target>
+        <jms:reference-file line="60">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="57f293cfb29a0d508d5fbfa5eb27c58adf4a1967" resname="Մինչև">
+        <source>Մինչև</source>
+        <target state="new">To</target>
+        <jms:reference-file line="136">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="51a04bf64575cc984a03a4e0c139a13fff9841fd" resname="Միջինը">
+        <source>Միջինը</source>
+        <target state="new">Average</target>
+        <jms:reference-file line="388">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="83c4330bedbfd689bde347377d51a0c2ee99af50" resname="Միջնորդ. Տոկոս">
+        <source>Միջնորդ. Տոկոս</source>
+        <target state="new">Commission Percent</target>
+        <jms:reference-file line="59">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b700bbb1de2686f28537585455db1b19d24f3e93" resname="Միջնորդ. Ֆիքսված">
+        <source>Միջնորդ. Ֆիքսված</source>
+        <target state="new">Fixed Commission</target>
+        <jms:reference-file line="58">/../../../../../../../.././app/Resources/views/bank/bank_transfers_swift.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="65210c5c77f6bf7c9a83cbd91443b2bf96857307" resname="Միջնորդավճար Տոկոս">
+        <source>Միջնորդավճար Տոկոս</source>
+        <target state="new">Commission Percent</target>
+        <jms:reference-file line="86">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e4771620760972e4f2029b366905bd7c7c01e155" resname="Միջնորդավճար Ֆիքսված">
+        <source>Միջնորդավճար Ֆիքսված</source>
+        <target state="new">Fixed Commission</target>
+        <jms:reference-file line="85">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fab78dd2662db9152881ef2bc8154581b4dc53ad" resname="Նիշ">
+        <source>Նիշ</source>
+        <target state="new">Symbol</target>
+        <jms:reference-file line="36">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2ccd33b6fb62869709be449e78a2fabb148b8e8c" resname="Նկարագրություն">
+        <source>Նկարագրություն</source>
+        <target state="new">description</target>
+        <jms:reference-file line="79">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fc316e71e1b13b220aa2c49b39bf075409d964ff" resname="Նոյ.">
+        <source>Նոյ.</source>
+        <target state="new">Nov.</target>
+        <jms:reference-file line="136">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="521c0e1f6d3e4c298a617dcc3913f031a5753fb3" resname="Նվազագույնը">
+        <source>Նվազագույնը</source>
+        <target state="new">Minimum</target>
+        <jms:reference-file line="358">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="61587e756e4e6ed0c74c880c6b65b511a9033ba3" resname="Որից`">
+        <source>Որից`</source>
+        <target state="new">From wich:</target>
+        <jms:reference-file line="87">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4943fb728c630e1a08b305194c3f058ee98199fa" resname="Ռուսական Ռուբլի">
+        <source>Ռուսական Ռուբլի</source>
+        <target state="new">Russian Roubles</target>
+        <jms:reference-file line="103">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8cb2a1aebc6c03adb8138b02caef52f467fcb363" resname="Սեպտ.">
+        <source>Սեպտ.</source>
+        <target state="new">Sep.</target>
+        <jms:reference-file line="134">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7b3a7353aa0d0ae3db6edfa1b6f0d947d5d1023a" resname="Սկսած">
+        <source>Սկսած</source>
+        <target state="new">From</target>
+        <jms:reference-file line="134">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d4f794d39c593167a75b0f6d05d94d99cfc2b43b" resname="Վաճ">
+        <source>Վաճ</source>
+        <target state="new">Sell</target>
+        <jms:reference-file line="119">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="121">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="123">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="125">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7a727f0441d0fcb515a4f534ca70d798dfcf2934" resname="Վարկ">
+        <source>Վարկ</source>
+        <target state="new">Loan</target>
+        <jms:reference-file line="37">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="48">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+        <jms:reference-file line="59">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="68707c6a30704dcd1cfd99a28dd18cc2b095ec50" resname="Վարկային Կազմակերպություններ">
+        <source>Վարկային Կազմակերպություններ</source>
+        <target state="new">Credit Companies</target>
+        <jms:reference-file line="33">/../../../../../../../.././app/Resources/views/credit-company/list.html.twig</jms:reference-file>
+        <jms:reference-file line="97">/../../../../../../../.././app/Resources/views/default/contact.html.twig</jms:reference-file>
+        <jms:reference-file line="6">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fce83d86edd8114133e5574609f25b78d7fd4e94" resname="Վարկի գումարը">
+        <source>Վարկի գումարը</source>
+        <target state="new">Loan Ammount</target>
+        <jms:reference-file line="58">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+        <jms:reference-file line="32">/../../../../../../../.././app/Resources/views/default/calculator_credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="68e00053d5a78f58b7484612e08d4447200a9793" resname="Վարկի ժամկետ ամիսներով">
+        <source>Վարկի ժամկետ ամիսներով</source>
+        <target state="new">Loan Terms in Months</target>
+        <jms:reference-file line="46">/../../../../../../../.././app/Resources/views/default/calculator_credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ac9b68edec071055c608085ac32ee5877e78ae55" resname="Վարկի տեսակը">
+        <source>Վարկի տեսակը</source>
+        <target state="new">Loan type</target>
+        <jms:reference-file line="29">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="527a0327f2f665c4d01b37b93bf78de21f06f1da" resname="Տարեթիվ">
+        <source>Տարեթիվ</source>
+        <target state="new">Year</target>
+        <jms:reference-file line="68">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2ea029e464259d7fb63c9718be0cf1b76e35f98d" resname="Տարեկան տոկոսադրույք">
+        <source>Տարեկան տոկոսադրույք</source>
+        <target state="new">Annual Interest Rate</target>
+        <jms:reference-file line="38">/../../../../../../../.././app/Resources/views/default/calculator_credit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="336d2adb69948a3a0f67a9e3feb04aa1a78cec2e" resname="Տոկոս">
+        <source>Տոկոս</source>
+        <target state="new">Percent</target>
+        <jms:reference-file line="73">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+        <jms:reference-file line="87">/../../../../../../../.././app/Resources/views/bank/bank_loans.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e3a26512a1557b0b416283466fd919955eeb1153" resname="Տոկոսագումար">
+        <source>Տոկոսագումար</source>
+        <target state="new">Interest</target>
+        <jms:reference-file line="41">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2e7d11a29999d06c6868b9ab8f115b0e8201eaaa" resname="Փետ.">
+        <source>Փետ.</source>
+        <target state="new">Feb.</target>
+        <jms:reference-file line="127">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8385b4fdc47ee27019773637c171e7638c5658b4" resname="Փոխանցման Համակարգ">
+        <source>Փոխանցման Համակարգ</source>
+        <target state="new">Transfer System</target>
+        <jms:reference-file line="84">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f5562f421903c66820ec140d5af541d5daadad41" resname="Փոփոխ.">
+        <source>Փոփոխ.</source>
+        <target state="new">Change</target>
+        <jms:reference-file line="22">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="62bf314d5200f6f9e191e8429ad55697d05ecb0e" resname="Փոփոխություն">
+        <source>Փոփոխություն</source>
+        <target state="new">Change</target>
+        <jms:reference-file line="39">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d455029ce2737a01230437eb7a2fc5c0cb0c4a41" resname="Քվոտաներ">
+        <source>Քվոտաներ</source>
+        <target state="new">Quotes</target>
+        <jms:reference-file line="32">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0f63003e8bae2298d910fda5aaac7773cbc8f1f8" resname="Օգոս.">
+        <source>Օգոս.</source>
+        <target state="new">Aug.</target>
+        <jms:reference-file line="133">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="75fe62ac885828110bbec33c56ca5c17cbb6bdd8" resname="Օր">
+        <source>Օր</source>
+        <target state="new">Day</target>
+        <jms:reference-file line="36">/../../../../../../../.././app/Resources/views/bank/bank_deposits.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7be29ca68f6da4d6bbd368d21d0775d53fb37fe3" resname="Օրեր">
+        <source>Օրեր</source>
+        <target state="new">Days</target>
+        <jms:reference-file line="125">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9961109aaa14b175f07fb854dba0463334140fb1" resname="ՖԵՐՄԵՐՆԵՐ">
+        <source>ՖԵՐՄԵՐՆԵՐ</source>
+        <target state="new">FARMERS</target>
+        <jms:reference-file line="56">/../../../../../../../.././app/Resources/views/default/index.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="951d07e2c02d59dce61c127c9c042ae0fc5f452a" resname="Ֆաքս.՝">
+        <source>Ֆաքս.՝</source>
+        <target state="new">Fax:</target>
+        <jms:reference-file line="38">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="06c50cb5bdce836ac437c00ec4a9136a5b917ca5" resname="Ֆինանսական Տեղեկատվության  Միասնական Հարթակ">
+        <source>Ֆինանսական Տեղեկատվության Միասնական Հարթակ</source>
+        <target state="new">Financial Fnformation In One Unified Platform</target>
+        <jms:reference-file line="45">/../../../../../../../.././app/Resources/views/elements/header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9970ce1cb180676ff026b31cc1c24f75ce6deb73" resname="՝">
+        <source>՝</source>
+        <target state="new">:</target>
+        <jms:reference-file line="108">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+        <jms:reference-file line="9">/../../../../../../.././app/Resources/views/branches.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6386deda770775fe3fadfd216d9bef926d979627" resname="բոլոր իրավունքները պաշտպանված են">
+        <source>բոլոր իրավունքները պաշտպանված են</source>
+        <target state="new">all rights reserved</target>
+        <jms:reference-file line="5">/../../../../../../../.././app/Resources/views/elements/footer.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ae764663902ba5d4c94eb8b2795c7d53a881811f" resname="թվականի կտրվածքով">
+        <source>թվականի կտրվածքով</source>
+        <target state="new"></target>
+        <jms:reference-file line="463">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4289f2ed931a73d10e6670a031b74830a1bc8b94" resname="րոպե">
+        <source>րոպե</source>
+        <target state="new">minutes</target>
+        <jms:reference-file line="126">/../../../../../../../.././app/Resources/views/bank/bank_transfers.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c5796c74f91a7a8fac0751da61959960d2ffc22c" resname="ք. Երևան, Վ. Սարգսյան 6">
+        <source>ք. Երևան, Վ. Սարգսյան 6</source>
+        <target state="new">6 V.Sargsyan, Yerevan Armenia</target>
+        <jms:reference-file line="36">/../../../../../../../.././app/Resources/views/bank/bank_cba.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a322ce655f06e6baf046f7650c499631cf6fcc59" resname="օր">
+        <source>օր</source>
+        <target state="new">day</target>
+        <jms:reference-file line="60">/../../../../../../../.././app/Resources/views/default/calculator_deposit.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

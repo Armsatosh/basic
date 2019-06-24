@@ -1,0 +1,26 @@
+{#<div class="owl-carousel">#}
+    {#{% for slide in slides %}#}
+    {#<div class="item">#}
+        {#<img src="{{asset('img/slides/uploads/'~slide.slideImage|thumb(845, 300))}}" height="300" width="845">#}
+    {#</div>#}
+    {#{% endfor %}#}
+{#</div>#}
+
+
+<div class="carousel-container">
+    <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            {% set index = 0 %}
+            {% for slide in slides %}
+                <div class="item {% if index == 0%} active {% endif %} ">
+                    <img src="{{asset('img/slides/uploads/'~slide.slideImage|thumb(845, 300))}}" height="300" width="845">
+                </div>
+                {% set index = 1 %}
+            {% endfor %}
+        </div>
+        <!-- Carousel nav -->
+        <div class="carousel-control left" href="#carousel" data-slide="prev"><i class="fa fa-angle-left"></i></div>
+        <div class="carousel-control right" href="#carousel" data-slide="next"><i class="fa fa-angle-right"></i></div>
+    </div>
+</div>

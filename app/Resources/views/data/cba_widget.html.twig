@@ -1,0 +1,23 @@
+{% set index = 0 %}
+
+{% for rate in cbaRates %}
+
+    {% if index == 0 %}
+        <span id="change-date">{{ rate.date }}</span>
+        <a href="https://bankinfo.am/" id="more" target="_blank">{{ 'Դիտել Ավելին'|trans }}</a>
+    {% endif %}
+
+    <tr>
+        <td style="font-size: 10px">{{ rate.currency }}</td>
+        <td>{{ rate.rate }}</td>
+        {% if rate.rate_difference > 0 %}
+        <td class="trend-positive">+{{ rate.rate_difference }}</td>
+        {% elseif rate.rate_difference == 0 %}
+        <td>{{ rate.rate_difference }}</td>
+        {% else %}
+        <td class="trend-negative">{{ rate.rate_difference }}</td>
+        {% endif %}
+    </tr>
+
+    {% set index = 1 %}
+{% endfor %}

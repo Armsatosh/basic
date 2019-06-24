@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+    
+{% set ogImage = "" %}
+
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{% set metaParams = {
+    'title': page.pageTitle,
+    'description': page.pageMetaDescription,
+    'keywords': page.pageMetaKeywords,
+    'ogImage': ogImage,
+} %}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ page.pageTitle }}</h2>
+    <div class="gap-30"></div>
+    <div class="col-md-12">
+        <div class="row">
+            {{ form_start(form) }}
+            <div class="credit__filter any-change-content">
+                <div class="col-md-3 col-sm-3 col-xs-3  no-padding">
+                    <label>{% trans %}Արժույթը{% endtrans %} *</label>
+                    {{ form_widget(form.currency, {'attr': {'class': 'form-control width-p-100'}}) }}
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 ">
+                    <label style="text-align: center;">{% trans %}Ժամկետ{% endtrans %} *</label>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5 col-xs-5 ">
+                            {{ form_widget(form.depositDays, {'attr': {'class': 'form-control numeric-field-no-minus','min':'0', 'placeholder': 'Օր'|trans}}) }}
+                        </div>
+                        <div class="col-md-2  col-sm-2 col-xs-2  no-padding text-center" style="margin-top: 7px;">
+                            {{ 'Կամ'|trans }}
+                        </div>
+                        <div class="col-md-5 col-sm-5 col-xs-5">
+                            {{ form_widget(form.depositMonths, {'attr': {'class': 'form-control numeric-field-no-minus','min':'0','placeholder': 'Ամիս'|trans}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 no-padding col-sm-3 col-xs-3">
+                    <label>{% trans %}Գումար{% endtrans %} *</label>
+                    {{ form_widget(form.depositMin, {'attr': {'class': 'form-control width-p-100 numeric-field-no-minus','min':'0'}}) }}
+                </div>
+                <div class="col-md-3 no-padding col-sm-3 col-xs-3">
+                    <label>&nbsp;</label>
+                    {{ form_widget(form.filter, {'attr': {'class': 'btn btn-success width-p-100 btn-filter new-button'}}) }}
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="gap-15"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="font-12">{% trans %}* -ով նշված դաշտերը պարտադիր լրացման ենթական են։{% endtrans %}</p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-30"></div>
+    {% if deposits is not empty %}
+        <div class="content__currency-container">
+            <table class="content__table content__table-credit">
+                <thead>
+                <tr>
+                    <td>{% trans %}ՀՀ{% endtrans %}</td>
+                    <td>{% trans %}Բանկ{% endtrans %}</td>
+                    <td>{% trans %}Անվանում{% endtrans %}</td>
+                    <td>{% trans %}Տոկոս{% endtrans %}</td>
+                    <td colspan="2">{% trans %}Հղում{% endtrans %}</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% set rc = 1 %}
+                {% for deposit in deposits %}
+                    <tr>
+                        <td>
+                            {% if rc < 10 %}
+                                0{{ rc }}
+                            {% else %}
+                                {{ rc }}
+                            {% endif %}
+                        </td>
+                        <td title="{{ deposit.bankTitle }}">
+                            <div class="content__table-currency-logo">
+                                <img src="{{ asset('img/bank-logos/24x24/'~deposit.bankSlug~'-24.png') }}"/>
+                            </div>
+                            <div class="content__table-currency-name">
+                                {{ deposit.bankTitle }}<br>
+                                <span title="{% trans %}Թարմացված է՝{% endtrans %} {{ deposit.depositUpdateDate|date('d.m.Y') }}">{{ deposit.depositUpdateDate|date('d.m.Y') }}</span>
+                            </div>
+                        </td>
+                        <td>{{ deposit.depositTitle }}</td>
+                        <td>
+                            {{ deposit.depositDepositDayPercent }}
+                        </td>
+                        <td style="width: 30px;">
+                            <a href="{{ asset(deposit.depositLink|raw) }}" target="_blank"><i
+                                        class="fa fa-link"></i></a>
+                        </td>
+                        <td>
+                            <a class="collapse-button" role="button" data-toggle="collapse"
+                               href="#collapse{{ deposit.bankSlug }}{{ deposit.depositId }}" aria-expanded="true"
+                               aria-controls="collapse{{ deposit.bankSlug }}{{ deposit.depositId }}"><i
+                                        class="fa fa-angle-down"></i></a>
+                        </td>
+                    </tr>
+                    <tr class="content__table-row-collaplse collapse"
+                        id="collapse{{ deposit.bankSlug }}{{ deposit.depositId }}">
+                        <td colspan="9">
+                            {{ deposit.depositDescription }}
+                        </td>
+                    </tr>
+                    {% set rc = rc + 1 %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="gap-20"></div>
+    {% endif %}
+    <div class="col-md-12">
+
+        {{ page.pageText|raw }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/datatables/datatables.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var inputDepositDay = $('input[name="form[depositDays]"]');
+            var inputDepositMonth = $('input[name="form[depositMonths]"]');
+
+            inputDepositDay.on('keyup', function () {
+                inputDepositMonth.val('');
+            });
+            inputDepositMonth.on('keyup', function () {
+                inputDepositDay.val('');
+            });
+
+            $('.numeric-field-no-minus').keydown(function (e) {
+                if(e.key == "-"){
+                    return false
+                }
+            })
+
+            $('#form_depositDays').change(function () {
+                $('#form_depositMonths').val("")
+            })
+            $('#form_depositMonths').change(function () {
+                $('#form_depositDays').val("")
+            })
+        });
+    </script>
+{% endblock %}

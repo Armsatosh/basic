@@ -1,0 +1,117 @@
+<header class="bg-light-grey">
+    <div class=" header__top">
+        <div class="row">
+            <div class="any-change-content">
+            <div class="col-md-1 col-sm-2 col-xs-2">
+                <ul class="header__social">
+                    <li><a href="https://www.facebook.com/bankinfo.am" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com/bankinfoAM" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-5 ">
+                <ul class="header__top-menu text-center ">
+                    {#<li><a href="{{ path('homepage') }}">{% trans from "navigation" %}Գլխավոր{% endtrans %}</a></li>#}
+                    <li><a href="{{ path('news_list') }}">{% trans from "navigation" %}Նորություններ{% endtrans %}</a></li>
+                    <li><a href="{{ path('default_about') }}">{% trans from "navigation" %}Մեր մասին{% endtrans %}</a></li>
+                    <li><a href="{{ path('default_contact') }}">{% trans from "navigation" %}Կապ{% endtrans %}</a></li>
+                    <li><a href="{{ path('widget_page') }}">{% trans from "navigation" %}Կցորդ{% endtrans %}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-5 col-sm-3 col-xs-3">
+                <div class="header__time">&nbsp;</div>
+            </div>
+            <div class="col-md-1 col-sm-2 col-xs-2">
+                {#<div class="col-md-1 col-sm-1 visible-xs visible-sm">#}
+                <ul class="header__languages">
+                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'hy'})) }}">Հայ</a></li>
+                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">Eng</a></li>
+                </ul>
+                    {#<div class="dropdown visible-xs visible-sm">#}
+                        {#<a class="btn btn-primary btn-success dropdown-toggle btn-news-header" type="button" data-toggle="dropdown">#}
+                            {#<span class="fa fa-align-justify"></span></a>#}
+                        {#<ul class="dropdown-menu">#}
+                            {#<li><a href="{{ path('news_list') }}">{% trans from "navigation" %}Նորություններ{% endtrans %}</a></li>#}
+                            {#<li><a href="{{ path('default_about') }}">{% trans from "navigation" %}Մեր մասին{% endtrans %}</a></li>#}
+                            {#<li><a href="{{ path('default_contact') }}">{% trans from "navigation" %}Կապ{% endtrans %}</a></li>#}
+                        {#</ul>#}
+                    {#</div>#}
+                {#</div>#}
+
+            </div>
+
+            {#<div class="col-md-12 col-sm-12 col-xs-2">#}
+                {#<div class="col-md-5 col-sm-3 col-xs-12">#}
+                    {#<ul class="header__top-menu hidden-xs text-center" style="padding: 10px 0;">#}
+                        {#<li><a href="{{ path('homepage') }}">{% trans from "navigation" %}Գլխավոր{% endtrans %}</a></li>#}
+                        {#<li><a href="{{ path('news_list') }}">{% trans from "navigation" %}Նորություններ{% endtrans %}</a></li>#}
+                        {#<li><a href="{{ path('default_about') }}">{% trans from "navigation" %}Մեր մասին{% endtrans %}</a></li>#}
+                        {#<li><a href="{{ path('default_contact') }}">{% trans from "navigation" %}Կապ{% endtrans %}</a></li>#}
+                    {#</ul>#}
+                {#</div>#}
+                {#<div class="dropdown visible-xs">#}
+                    {#<a class="btn btn-primary btn-success dropdown-toggle" type="button" data-toggle="dropdown">#}
+                        {#<span class="fa fa-align-justify"></span></a>#}
+                    {#<ul class="dropdown-menu">#}
+                        {#<li><a href="{{ path('news_list') }}">{% trans from "navigation" %}Նորություններ{% endtrans %}</a></li>#}
+                        {#<li><a href="{{ path('default_about') }}">{% trans from "navigation" %}Մեր մասին{% endtrans %}</a></li>#}
+                        {#<li><a href="{{ path('default_contact') }}">{% trans from "navigation" %}Կապ{% endtrans %}</a></li>#}
+                    {#</ul>#}
+                {#</div>#}
+            {#</div>#}
+            {#<div class="col-xs-12 visible-xs">#}
+                {#<div class="header__time">&nbsp;</div>#}
+            {#</div>#}
+            </div>
+        </div>
+    </div>
+    <div class="bg-white" style="border-bottom: 1px solid #c0c0c0;">
+        <div class="header__main">
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    <div class="header__main-logo-container">
+                        <div class="header__main-logo-image">
+                            <a href="{{path('homepage')}}">
+                                <img src="{{ asset('img/design-elements/bankinfo-logo.png') }}" class="img-responsive" >
+                            </a>
+                        </div>
+                        <div class="header__main-logo-text">
+                            <h2>{% trans %}Ֆինանսական Տեղեկատվության Միասնական Հարթակ{% endtrans %}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3  col-md-3  col-sm-3 col-xs-3">
+                    <div class="header__calculator">
+                        <div class="header__calculator-image">
+                            <img src="{{ asset('img/design-elements/calculator.png') }}" class="img-responsive">
+                        </div>
+                        <div class="header__calculator-links">
+                            <a href="{{ path('default_calculator_credit') }}">{% trans from "navigation" %}Վարկային Հաշվիչ{% endtrans %}</a><br>
+                            <a href="{{ path('default_calculator_deposit') }}">{% trans from "navigation" %}Ավանդային Հաշվիչ{% endtrans %}</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</header>
+{% if false %}
+<div class="container marquees">
+    <div class="row">
+        <div class="col-md-12 marquee-cb-rates">
+            <marquee class="header__currencies" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+                <span class="header__currencies-rate">USD</span> {#<?php echo $rates_array['USD']; ?>#}
+                <span class="header__currencies-rate">EUR</span> {#<?php echo $rates_array['EUR']; ?>#}
+                <span class="header__currencies-rate">GBP</span> {#<?php echo $rates_array['GBP']; ?>#}
+                <span class="header__currencies-rate">GEL</span> {#<?php echo $rates_array['GEL']; ?>#}
+                <span class="header__currencies-rate">RUB</span> {#<?php echo $rates_array['RUB']; ?>#}
+                <span class="header__currencies-rate">CHF</span> {#<?php echo $rates_array['CHF']; ?>#}
+                <span class="header__currencies-rate">CAD</span> {#<?php echo $rates_array['CAD']; ?>#}
+                <span class="header__currencies-rate">AED</span> {#<?php echo $rates_array['AED']; ?>#}
+                <span class="header__currencies-rate">CNY</span> {#<?php echo $rates_array['CNY']; ?>#}
+                <span class="header__currencies-rate">JPY</span> {#<?php echo $rates_array['JPY']; ?>#}
+                <span class="header__currencies-rate">KZT</span> {#<?php echo $rates_array['KZT']; ?>#}
+                <span class="header__currencies-rate">UAH</span> {#<?php echo $rates_array['UAH']; ?>#}
+            </marquee>
+        </div>
+    </div>
+</div>
+{% endif %}

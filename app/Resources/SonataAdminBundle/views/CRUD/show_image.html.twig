@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+
+{% block field%}
+    <div>
+        {% if field_description.options.image is not empty %}
+        <img src="{{ asset(field_description.options.image) }}" class="img-responsive" />
+        {% else %}
+            No Image
+        {% endif %}
+    </div>
+{% endblock %}

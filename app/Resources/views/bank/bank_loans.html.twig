@@ -1,0 +1,206 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{% set metaParams = {
+    'title': page.pageTitle,
+    'description': page.pageMetaDescription,
+    'keywords': page.pageMetaKeywords,
+    'ogImage': ogImage,
+} %}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ page.pageTitle }}</h2>
+    <div class="gap-30"></div>
+    <div class="col-md-12">
+        <div class="row">
+                {{ form_start(form) }}
+            <div class="credit__filter any-change-content">
+                <div class="col-md-4 no-padding">
+                    <label>{% trans %}Վարկի տեսակը{% endtrans %} *</label>
+                    {{ form_errors(form.loanGroup) }}
+                    <select name="form[loanGroup]" class="form-control width-p-100">
+                        {% for key,val in form.loanGroup.vars.choices %}
+                            {% for loanGroup in loanGroups %}
+                                {% if loanGroup.loanGroupId == val.value %}
+
+                                    {% set optVal = loanGroup.loanGroupTitle %}
+
+                                    {% for translation in loanGroup.translations %}
+                                        {% if translation.locale == app.request.locale %}
+                                            {% set optVal = translation.content %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <option value="{{ val.value }}" {{ form.loanGroup.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.loanGroup.vars.value ? ' selected ' : '') }}>{{ optVal }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2 no-padding">
+                    <label>{% trans %}Արժույթը{% endtrans %} *</label>
+                    {{ form_widget(form.currency, {'attr': {'class': 'form-control width-p-100'}}) }}
+                </div>
+                <div class="col-md-2 no-padding" id="loan-inputs-block-month" title="{{ 'Ոչ պարտադիր'|trans }}">
+                    <label>{% trans %}Ամիսներ{% endtrans %}</label>
+                    {{ form_widget(form.loanTermsMin, {'attr': {'class': 'form-control width-p-100 numeric-field-no-minus','min':'0','placeholder':'Ոչ պարտադիր'|trans}}) }}
+                </div>
+                <div class="col-md-2 no-padding" title="{{ 'Ոչ պարտադիր'|trans }}">
+                    <label>{% trans %}Վարկի գումարը{% endtrans %}</label>
+                    {{ form_widget(form.loanMin, {'attr': {'class': 'form-control width-p-100 numeric-field-no-minus','min':'0','placeholder':'Ոչ պարտադիր'|trans  }}) }}
+                </div>
+                <div class="col-md-2 no-padding">
+                    <label>&nbsp;</label>
+                    {{ form_widget(form.filter, {'attr': {'class': 'btn btn-success width-p-100 btn-filter new-button'}}) }}
+                </div>
+                {% do form.loanGroup.setRendered %}
+            </div>
+                {{ form_end(form) }}
+        </div>
+
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="gap-15"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="font-12">{% trans %}* -ով նշված դաշտերը պարտադիր լրացման ենթական են։{% endtrans %}</p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-30"></div>
+    {% if loans is not empty %}
+        <div class="content__currency-container">
+            <table class="content__table content__table-credit">
+                <thead>
+                <tr>
+                    <td>{% trans %}ՀՀ{% endtrans %}</td>
+                    <td style="width: 220px !important;">{% trans %}Բանկ{% endtrans %}</td>
+                    <td>{% trans %}Անվանում{% endtrans %}</td>
+                    <td style="width: 70px;">{% trans %}Ամիս{% endtrans %}</td>
+                    <td style="width: 70px;">{% trans %}Տոկոս{% endtrans %}</td>
+                    <td style="width: 115px;">{% trans %}Գումար{% endtrans %}</td>
+                    <td style="width: 60px!important" colspan="2">{% trans %}Հղում{% endtrans %}</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% set rc = 1 %}
+
+                {% for loan in loans %}
+                    <tr>
+                        <td>
+                            {% if rc < 10 %}
+                                0{{ rc }}
+                            {% else %}
+                                {{ rc }}
+                            {% endif %}
+                        </td>
+                        <td title="{{ loan.bank_title }}">
+                            <div class="content__table-currency-logo">
+                                <img src="{{ asset('img/bank-logos/24x24/'~loan.bank_slug~'-24.png') }}"/>
+                            </div>
+                            <div class="content__table-currency-name">
+                                {{ loan.bank_title }}<br>
+                                <span title="{% trans %}Թարմացված է՝{% endtrans %} {{ loan.loan_update_date|date('d.m.Y') }}">{{ loan.loan_update_date|date('d.m.Y') }}</span>
+                            </div>
+                            {#                            <img src="{{ asset('img/bank-logos/24x24/'~loan.bank_slug~'-24.png') }}"  />#}
+                        </td>
+                        <td>{{ loan.loan_title }}</td>
+                        <td>
+                            {% if loan.loan_terms_min == loan.loan_terms_max %}
+                                {{ loan.loan_terms_min* 1 }}
+                            {% elseif loan.loan_terms_max == 0 %}
+                                {% trans %}Սկսած{% endtrans %} {{ loan.loan_terms_min * 1 }}
+                            {% elseif loan.loan_terms_min == 0 %}
+                                {% trans %}Մինչև{% endtrans %} {{ loan.loan_terms_max * 1 }}
+                            {% else %}
+                                {{ loan.loan_terms_min* 1 }} - {{ loan.loan_terms_max* 1 }}
+                            {% endif %}
+                        </td>
+                        <td style="width: 50px;">
+                            <b>
+                                {% if loan.loan_percent_min == loan.loan_percent_max %}
+                                    {{ loan.loan_percent_min* 1 }}
+                                {% elseif loan.loan_percent_max == 0 %}
+                                    {% trans %}Սկսած{% endtrans %} {{ loan.loan_percent_min * 1 }}
+                                {% elseif loan.loan_percent_min == 0 %}
+                                    {% trans %}Մինչև{% endtrans %} {{ loan.loan_percent_max * 1 }}
+                                {% else %}
+                                    {{ loan.loan_percent_min* 1 }} - {{ loan.loan_percent_max* 1 }}
+                                {% endif %}
+
+                                {% if loan.loan_percent_subsidized is not null and loan.loan_percent_subsidized is not empty and loan.loan_percent_subsidized > 0 %}
+                                    (-{{ loan.loan_percent_subsidized* 1 }})
+                                {% endif %}
+                            </b>
+                        </td>
+                        <td>
+                            {% if loan.loan_max == 0 and loan.loan_min == 0 %}
+                                -
+                            {% elseif loan.loan_max == 0 %}
+                                {% trans %}Սկսած{% endtrans %} {{ loan.loan_min* 1 }} {{ loan.loan_currency_min_title }}
+                            {% elseif loan.loan_min == 0 %}
+                                {% trans %}Մինչև{% endtrans %} {{ loan.loan_max * 1 }} {{ loan.loan_currency_max_title }}
+                            {% elseif loan.loan_min is empty and loan.loan_max is empty %}
+                                -
+                            {% else %}
+                                {{ loan.loan_min * 1 }} {{ loan.loan_currency_min_title }} - {{ loan.loan_max* 1 }} {{ loan.loan_currency_max_title }}
+                            {% endif %}
+
+                            {% if loan.currency_symbol is not empty and loan.currency_symbol != filterCurrency.currencySymbol %}
+                                {{ loan.currency_symbol }}
+                            {% endif %}
+                        </td>
+                        <td style="width: 30px !important;">
+                            <a class="content__table-link" style="padding-top: 7px;"
+                               href="{{ asset(loan.loan_link|raw) }}" target="_blank"><i class="fa fa-link"></i></a>
+                        </td>
+                        <td style="width: 30px !important;">
+                            <a class="content__table-link collapse-button" role="button" data-toggle="collapse"
+                               href="#collapseAcba{{ loan.bank_slug }}{{ loan.loan_id }}" aria-expanded="true"
+                               aria-controls="collapseAcba{{ loan.bank_slug }}{{ loan.loan_id }}"><i
+                                        class="fa fa-angle-down"></i></a>
+                        </td>
+                    </tr>
+                    <tr class="content__table-row-collaplse collapse"
+                        id="collapseAcba{{ loan.bank_slug }}{{ loan.loan_id }}">
+                        <td colspan="10">
+                            {{ loan.loan_description|raw }}
+                        </td>
+                    </tr>
+                    {% set rc = rc + 1 %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="gap-20"></div>
+    {% endif %}
+    <div class="col-md-12">
+        {{ page.pageText|raw }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/datatables/datatables.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $('.numeric-field-no-minus').keydown(function (e) {
+                if(e.key == "-"){
+                    return false
+                }
+            })
+        });
+    </script>
+{% endblock %}

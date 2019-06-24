@@ -1,0 +1,155 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+#services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+
+services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        arguments: ['@doctrine.orm.default_entity_manager']
+        public: false
+        tags:
+            - { name: twig.extension }
+    
+    gedmo.listener.translatable:
+        class: Gedmo\Translatable\TranslatableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+            - [ setDefaultLocale, [ hy ] ]
+            - [ setTranslationFallback, [ true ] ] 
+    
+    form.type.translatable:
+        class: AppBundle\Form\Type\TranslatedFieldType
+        arguments: [ @service_container ]
+        tags:
+          - { name: form.type, alias: translatable_field }
+
+    
+    admin.bank:
+        class: AppBundle\Admin\BankAdmin
+        arguments: [~, AppBundle\Entity\Bank, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Banks", label: Banks }
+    admin.bankBrach:
+        class: AppBundle\Admin\BankBranchAdmin
+        arguments: [~, AppBundle\Entity\BankBranch, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Banks", label: Bank Branches }
+    admin.bankAtm:
+        class: AppBundle\Admin\BankAtmAdmin
+        arguments: [~, AppBundle\Entity\BankAtm, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Banks", label: Bank Atms }
+    admin.creditCompanies:
+        class: AppBundle\Admin\CreditCompanyAdmin
+        arguments: [~, AppBundle\Entity\CreditCompany, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Credit Companies", label: Credit Companies }
+    admin.creditCompanyBranches:
+        class: AppBundle\Admin\CreditCompanyBranchAdmin
+        arguments: [~, AppBundle\Entity\CreditCompanyBranch, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Credit Companies", label: Credit Company Branches }
+    admin.loanGroup:
+        class: AppBundle\Admin\LoanGroupAdmin
+        arguments: [~, AppBundle\Entity\LoanGroup, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Loans, Deposits", label: Loan Groups }
+    admin.loan:
+        class: AppBundle\Admin\LoanAdmin
+        arguments: [~, AppBundle\Entity\Loan, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Loans, Deposits", label: Loans }
+    admin.deposit:
+        class: AppBundle\Admin\DepositAdmin
+        arguments: [~, AppBundle\Entity\Deposit, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Loans, Deposits", label: Deposits }
+    admin.depositDay:
+        class: AppBundle\Admin\DepositDayAdmin
+        arguments: [~, AppBundle\Entity\DepositDay, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Loans, Deposits", label: Deposit Days }
+    admin.depositDepositDay:
+        class: AppBundle\Admin\DepositsDepositDaysAdmin
+        arguments: [~, AppBundle\Entity\DepositsDepositDays, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Loans, Deposits", label: Deposit / Deposit Days }
+    admin.transferType:
+        class: AppBundle\Admin\TransferTypeAdmin
+        arguments: [~, AppBundle\Entity\TransferType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Transfers", label: Transfer Types }
+    admin.transfer:
+        class: AppBundle\Admin\TransferAdmin
+        arguments: [~, AppBundle\Entity\Transfer, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Transfers", label: Transfers }
+    admin.transferCurrency:
+        class: AppBundle\Admin\TransferCurrencyAdmin
+        arguments: [~, AppBundle\Entity\TransferCurrency, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Transfers", label: Transfer Currencies }
+    admin.ewallet:
+        class: AppBundle\Admin\EwalletAdmin
+        arguments: [~, AppBundle\Entity\Ewallet, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "E-Wallets", label: Ewallet Types }
+    admin.ewalletRate:
+        class: AppBundle\Admin\EwalletRateAdmin
+        arguments: [~, AppBundle\Entity\EwalletRate, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "E-Wallets", label: Ewallet Rates }
+    admin.page:
+        class: AppBundle\Admin\PageAdmin
+        arguments: [~, AppBundle\Entity\Page, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: Static Pages }
+    admin.slide:
+        class: AppBundle\Admin\SlideAdmin
+        arguments: [~, AppBundle\Entity\Slide, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: Slides }
+    admin.country:
+        class: AppBundle\Admin\CountryAdmin
+        arguments: [~, AppBundle\Entity\Country, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: Countries }
+    admin.currency:
+        class: AppBundle\Admin\CurrencyAdmin
+        arguments: [~, AppBundle\Entity\Currency, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: Currencies }
+    admin.bankRate:
+        class: AppBundle\Admin\BankRateAdmin
+        arguments: [~, AppBundle\Entity\Rate, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Data", label: Bank Rates }
+    admin.cbaRate:
+        class: AppBundle\Admin\CbaRateAdmin
+        arguments: [~, AppBundle\Entity\CbaRate, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Data", label: CBA Rates }
+    admin.news:
+        class: AppBundle\Admin\NewsAdmin
+        arguments: [~, AppBundle\Entity\News, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "News", label: News }
+#    admin.news_comments:
+#        class: AppBundle\Admin\CommentAdmin
+#        arguments: [~, AppBundle\Entity\Comment, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: "News", label: News Comments }

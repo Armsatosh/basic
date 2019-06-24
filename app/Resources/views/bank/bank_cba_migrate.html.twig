@@ -1,0 +1,127 @@
+{% extends 'light.html.twig' %}
+{% block title %}Բանկոմատներ | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">Կենտրոնական Բանկի Փոխարժեքներ</h2>
+    <div class="gap-20"></div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="form-inline">
+                <input type="datetime" class="form-control" name="start_date" value="2000-01-01T00:00:00">
+                <button class="btn btn-success start">Start</button>
+            </div>
+        </div>
+    </div>
+    <div class="gap-20"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        
+        $(function(){
+            
+            localStorage.rowCounter = 1;
+            
+            $('button.start').on('click', function(e){
+                
+                var startDate = $('input[type="datetime"]').val();
+                e.preventDefault();
+                getRates(startDate);
+                
+            });
+            
+            function getRates(day){
+                
+                $.ajax({
+                    url: "/cba-data/"+day+"/historical.json",
+                    method: "POST",
+                    success: function(rates){
+                        var currentDate = rates.date_currenct;
+                        var nextDate = rates.date_next_available;
+                        var ratesForDay = rates.rates;
+                        
+                        if(nextDate !== ""){
+                            
+                            $.each(ratesForDay, function(key, val){
+                                
+                                var dateCurrent = currentDate;
+                                var iso = val.iso;
+                                var rate = val.rate;
+                                var amount = val.amount;
+                                
+                                importToDb(dateCurrent, iso, rate, amount);
+                                
+                            });
+                            
+                            getRates(nextDate);
+                            
+                        } else {
+                            
+                            $.each(ratesForDay, function(key, val){
+                                
+                                var dateCurrent = currentDate;
+                                var iso = val.iso;
+                                var rate = val.rate;
+                                var amount = val.amount;
+                                
+                                importToDb(dateCurrent, iso, rate, amount);
+                                
+                            });
+                            
+                        }
+
+                    }
+                });
+                
+            }
+            
+            function importToDb(dateCurrent, iso, rate, amount) {
+                
+                $.ajax({
+                    url: "/central-bank/create",
+                    method: "POST",
+                    data: "date_current="+dateCurrent+"&iso="+iso+"&rate="+rate+"&amount="+amount,
+                    success: function(r){
+
+                        {#var tBody = $('rateStatus');
+                        var tableRow = "";
+                        
+                        tableRow = "<tr>";
+                        tableRow += "<td>"+localStorage.rowCounter+"</td>";
+                        tableRow += "<td>"+r+"</td>";
+                        tableRow += "<td>"+iso+"</td>";
+                        tableRow += "<td>"+rate+"</td>";
+                        tableRow += "<td>"+dateCurrent+"</td>";
+                        tableRow += "<td>Success</td>";
+                        tableRow += "</tr>";
+                        
+                        tBody.append(tableRow);#}
+                        localStorage.rowCounter = localStorage.rowCounter + 1;
+
+                    },
+                    error: function(e){
+                        
+                        {#var tBody = $('rateStatus');
+                        var tableRow = "";
+                        
+                        tableRow = "<tr>";
+                        tableRow += "<td><b>ERROR</b></td>";
+                        tableRow += "<td><b>ERROR</b></td>";
+                        tableRow += "<td>"+iso+"</td>";
+                        tableRow += "<td>"+rate+"</td>";
+                        tableRow += "<td>"+dateCurrent+"</td>";
+                        tableRow += "<td>Error</td>";
+                        tableRow += "</tr>";#}
+                        
+                        tBody.append(tableRow);
+                        
+                    }
+                });
+                
+            }
+            
+        });
+        
+    </script>
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{% 
+    set metaParams = {
+        'title': page.pageTitle,
+        'description': page.pageMetaDescription,
+        'keywords': page.pageMetaKeywords,
+        'ogImage': ogImage
+    }
+%}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ page.pageTitle }}</h2>
+    <div class="gap-20"></div>
+    <div class="row">
+        <div class="about-row">
+            {{ page.pageText|raw }}
+        </div>
+    </div>
+{% endblock %}

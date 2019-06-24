@@ -1,0 +1,564 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{% set metaParams = {
+    'title': page.pageTitle,
+    'description': page.pageMetaDescription,
+    'keywords': page.pageMetaKeywords,
+    'ogImage': ogImage,
+} %}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/owl.carousel.css') }}" rel="stylesheet"/>
+    {{ parent() }}
+{% endblock %}
+{% set cashActive = true %}
+{% block body %}
+    {% include 'elements/home_slider.html.twig' with {'slides': slides} %}
+    <div class="flex-content  content__service-buttons">
+        <div class="main-content-item">
+            <div class="btn-group width-p-100">
+                <button type="button"
+                        class="btn btn-thick btn-success dropdown-toggle width-p-100 content__service-buttons-people new-button new-button-activated">
+                    {% trans %}ԱՆՀԱՏՆԵՐ{% endtrans %}
+                </button>
+                <div class="content__service-buttons__sub width-p-100">
+                    <a href="{{ path('bank_loans', {'entity_type': 'physical'}) }}">{% trans %}Վարկ{% endtrans %}</a>
+                    <a href="{{ path('bank_deposits', {'entity_type': 'physical'}) }}">{% trans %}Ավանդ{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+        <div class="main-content-item">
+            <div class="btn-group width-p-100">
+                <button type="button"
+                        class="btn btn-thick btn-success dropdown-toggle width-p-100 content__service-buttons-business new-button">
+                    {% trans %}ԲԻԶՆԵՍ{% endtrans %}
+                </button>
+                <div class="content__service-buttons__sub width-p-100">
+                    <a href="{{ path('bank_loans', {'entity_type': 'legal'}) }}">{% trans %}Վարկ{% endtrans %}</a>
+                    <a href="{{ path('bank_deposits', {'entity_type': 'legal'}) }}">{% trans %}Ավանդ{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+        <div class="main-content-item">
+            <div class="btn-group width-p-100">
+                <button type="button"
+                        class="btn btn-thick btn-success dropdown-toggle width-p-100 content__service-buttons-farmer new-button">
+                    {% trans %}ՖԵՐՄԵՐՆԵՐ{% endtrans %}
+                </button>
+                <div class="content__service-buttons__sub full width-p-100">
+                    <a href="{{ path('bank_loans', {'entity_type': 'farmer'}) }}">{% trans %}Վարկ{% endtrans %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center text-bold">{% trans %}Արտարժույթի Փոխարժեքները ՀՀ Բանկերում{% endtrans %}</h2>
+    <div class="rates-type-changer-block">
+        {#<div class="container-fluid">#}
+
+            {#<div class="row" style="margin: 15px 0px">#}
+
+                <div class="col-md-4" style="border-right: 0.5px solid #ccc">
+                    <p>{{ "Փոխանակման տեսակ"|trans }}</p>
+                    <div class="rate-type-block">
+                        <a href="{{ path('homepage',{'slug':'cash','type':app.request.attributes.get('type'),'dateTime':app.request.attributes.get('dateTime')}) }}" class="cash-noncash">
+                            <div class="rate-type  {{ (app.request.attributes.get('slug')=='cash')? 'rate-type-active': '' }}">
+                                <i class="fa fa-check"></i>
+                            </div>
+                        {{ "Կանխիկ"|trans }}
+                        </a>
+                    </div>
+
+                    <div class="rate-type-block">
+                        <a href="{{ path('homepage',{'slug':'non-cash','type':app.request.attributes.get('type'),'dateTime':app.request.attributes.get('dateTime')}) }}" class="cash-noncash">
+                            <div class="rate-type {{ (app.request.attributes.get('slug')=='non-cash')?'rate-type-active': '' }}">
+                                <i class="fa fa-check"></i>
+                            </div>
+                        {{ "Անկանխիկ"|trans }}
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4" style="border-right: 0.5px solid #ccc">
+                    <p>{{ "Փոխարժեքի տեսակ"|trans }}</p>
+                    <a class="rate-type-block" href="{{ path('homepage',{'slug':app.request.attributes.get('slug'),'type':'direct','dateTime':app.request.attributes.get('dateTime')}) }}">
+                        <div class="rate-type {{ (app.request.attributes.get('type')=='direct')?'rate-type-active ': '' }}">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        {{ "Ուղղակի"|trans }}
+                    </a>
+
+                    <a class="rate-type-block" href="{{ path('homepage',{'slug':app.request.attributes.get('slug'),'type':'crossed','dateTime':app.request.attributes.get('dateTime')}) }}">
+                        <div class="rate-type {{ (app.request.attributes.get('type')=='crossed')?'rate-type-active ': '' }}">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        {{ "Խաչաձև"|trans }}
+                    </a>
+                </div>
+                <div class="col-md-4" style="font-size: 24px">
+                        <div class="date-block-container">
+                            <span class="date-block-icon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+
+                        <div class="date-picker-container">
+
+                            <div class="date-picker-container-closer">
+                                <i class="fa fa-times"></i>
+                            </div>
+
+
+                            <form action="{{ path('homepage',{'slug':app.request.attributes.get('slug'),'type':app.request.attributes.get('type'),'dateTime':app.request.attributes.get('dateTime')}) }}" method="post">
+                                <div class="picker-block">
+                                    <label for="filter-rate-date">{{ 'Ամսաթիվ'|trans }}</label>
+                                    <input type="date" id="filter-rate-date" name="rate-date" value="{{ 'now'|date('Y-m-d') }}"  min="{{ minRateDate }}" max="{{ 'now'|date('Y-m-d') }}" required >
+                                </div>
+                                <div class="picker-block">
+                                    <label for="filter-rate-time">{{ 'Ժամ'|trans }}</label>
+                                    <select id="filter-rate-time" name="rate-time" required>
+                                    </select>
+                                </div>
+                                <div class="picker-block">
+                                    <button id="filter-rate-date-btn"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+
+                </div>
+
+
+            {#</div>#}
+
+
+        {#</div>#}
+    </div>
+    <div class="gap-20"></div>
+    <div class="content__currency-container">
+
+        {% if app.request.attributes.get('type')!='crossed' %}
+            {% set highUsdBuy = null %} {% set lowUsdSell = 100000000 %}
+            {% set highEurBuy = null %} {% set lowEurSell = 100000000 %}
+            {% set highRubBuy = null %} {% set lowRubSell = 100000000 %}
+            {% set highGbpBuy = null %} {% set lowGbpSell = 100000000 %}
+
+            {% for hlRate in rates %}
+                {#Maximum buy#}
+                {% if hlRate.currency_id == 1 and hlRate.rate_buy >= highUsdBuy %}
+                    {% set highUsdBuy = hlRate.rate_buy %}
+                {% endif %}
+                {% if hlRate.currency_id == 10 and hlRate.rate_buy >= highEurBuy %}
+                    {% set highEurBuy = hlRate.rate_buy %}
+                {% endif %}
+                {% if hlRate.currency_id == 51 and hlRate.rate_buy >= highRubBuy %}
+                    {% set highRubBuy = hlRate.rate_buy %}
+                {% endif %}
+                {% if hlRate.currency_id == 2 and hlRate.rate_buy >= highGbpBuy %}
+                    {% set highGbpBuy = hlRate.rate_buy %}
+                {% endif %}
+
+                {#Minimum sell#}
+                {% if hlRate.currency_id == 1 and hlRate.rate_sell <= lowUsdSell %}
+                    {% set lowUsdSell = hlRate.rate_sell %}
+                {% endif %}
+                {% if hlRate.currency_id == 10 and hlRate.rate_sell <= lowEurSell %}
+                    {% set lowEurSell = hlRate.rate_sell %}
+                {% endif %}
+                {% if hlRate.currency_id == 51 and hlRate.rate_sell <= lowRubSell %}
+                    {% set lowRubSell = hlRate.rate_sell %}
+                {% endif %}
+                {% if hlRate.currency_id == 2 and hlRate.rate_sell <= lowGbpSell %}
+                    {% set lowGbpSell = hlRate.rate_sell %}
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+
+        <table class="content__table highlightable content__table-currency featured-table">
+            {% if app.request.attributes.get('slug')=='non-cash' and  app.request.attributes.get('type')=='direct' %}
+                <thead>
+                <tr>
+                    <th rowspan="2" width="165">{% trans %}Բանկ{% endtrans %}</th>
+                    <th colspan="2" class="content__table-currency-symbol">USD&nbsp;&nbsp;&nbsp;$</th>
+                    <th colspan="2" class="content__table-currency-symbol">EUR&nbsp;&nbsp;&nbsp;&euro;</th>
+                    <th colspan="2" class="content__table-currency-symbol">RUB&nbsp;&nbsp;&nbsp;&#x20bd;</th>
+                    <th colspan="2" class="content__table-currency-symbol">GBP&nbsp;&nbsp;&nbsp;&pound;</th>
+                </tr>
+                <tr>
+                    <th class="content__table-currency-buy-sell">{% trans %}Առք{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Վաճ{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Առք{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Վաճ{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Առք{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Վաճ{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Առք{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Վաճ{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set currentBank = null %}
+                {% for bank in banks %}
+                    {% if currentBank != bank.bankId %}
+                        <tr>
+                        <td class="content__table-currency-bank-name">
+                            <div class="content__table-currency-logo bank-logos {{ bank.bankSlug }}-24"></div>
+                            <div class="content__table-currency-name">
+                                <a href="{{ path('bank_banks_branches', {'bankSlug': bank.bankSlug}) }}">{{ bank.bankTitle }}</a><br>
+
+                                {% if dateTime %}
+                                    <span title="{{ 'Թարմացված է՝'|trans }} {{ dateTime|date('d.m.Y H:i') }}">{{ dateTime|date('d.m.Y H:i') }}</span>
+                                {% else %}
+                                    {% if bank.bankId != 13 %}
+                                        <span title="{{ 'Թարմացված է՝'|trans }} {{ rateUpdatDate|date('d.m.Y H:i') }}">{{ rateUpdatDate|date('d.m.Y H:i') }}</span>
+                                    {% else %}
+                                        <span title="{{ 'Թարմացված է՝'|trans }} {{ rateHSBCUpdatDate|date('d.m.Y H:i') }}">{{ rateHSBCUpdatDate|date('d.m.Y H:i') }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </td>
+                    {% endif %}
+
+                    {% set currentBank = bank.bankId %}
+
+                    {% set hasUsd = false %}
+                    {% for usdRate in rates %}
+                        {% if usdRate.currency_id == 1 and usdRate.bank_id == currentBank %}
+                            <td class="content__table-currency-rates">
+                                {% if usdRate.rate_non_cash_buy == highUsdBuy %}<b>{% endif %}
+                                    {{ usdRate.rate_non_cash_buy }}
+                                    {% if usdRate.rate_non_cash_buy == highUsdBuy %}</b>{% endif %}
+                            </td>
+                            <td class="content__table-currency-rates">
+                                {% if usdRate.rate_non_cash_sell == lowUsdSell %}<b>{% endif %}
+                                    {{ usdRate.rate_non_cash_sell }}
+                                    {% if usdRate.rate_non_cash_sell == lowUsdSell %}</b>{% endif %}
+                            </td>
+                            {% set hasUsd = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if hasUsd == false %}
+                        <td class="content__table-currency-rates">-</td>
+                        <td class="content__table-currency-rates">-</td>
+                    {% endif %}
+
+                    {% set hasEur = false %}
+                    {% for eurRate in rates %}
+                        {% if eurRate.currency_id == 10 and eurRate.bank_id == currentBank %}
+                            <td class="content__table-currency-rates">
+                                {% if eurRate.rate_non_cash_buy == highEurBuy %}<b>{% endif %}
+                                    {{ eurRate.rate_non_cash_buy }}
+                                    {% if eurRate.rate_non_cash_buy == highEurBuy %}</b>{% endif %}
+                            </td>
+                            <td class="content__table-currency-rates">
+                                {% if eurRate.rate_non_cash_sell == lowEurSell %}<b>{% endif %}
+                                    {{ eurRate.rate_non_cash_sell }}
+                                    {% if eurRate.rate_non_cash_sell == lowEurSell %}</b>{% endif %}
+                            </td>
+                            {% set hasEur = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if hasEur == false %}
+                        <td class="content__table-currency-rates">-</td>
+                        <td class="content__table-currency-rates">-</td>
+                    {% endif %}
+
+                    {% set hasRub = false %}
+                    {% for rubRate in rates %}
+                        {% if rubRate.currency_id == 51 and rubRate.bank_id == currentBank %}
+                            <td class="content__table-currency-rates">
+                                {% if rubRate.rate_non_cash_buy == highRubBuy %}<b>{% endif %}
+                                    {{ rubRate.rate_non_cash_buy }}
+                                    {% if rubRate.rate_non_cash_buy == highRubBuy %}</b>{% endif %}
+                            </td>
+                            <td class="content__table-currency-rates">
+                                {% if rubRate.rate_non_cash_sell == lowRubSell %}<b>{% endif %}
+                                    {{ rubRate.rate_non_cash_sell }}
+                                    {% if rubRate.rate_non_cash_sell == lowRubSell %}</b>{% endif %}
+                            </td>
+                            {% set hasRub = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if hasRub == false %}
+                        <td class="content__table-currency-rates">-</td>
+                        <td class="content__table-currency-rates">-</td>
+                    {% endif %}
+
+                    {% set hasGbp = false %}
+                    {% for gbpRate in rates %}
+                        {% if gbpRate.currency_id == 2 and gbpRate.bank_id == currentBank %}
+                            <td class="content__table-currency-rates">
+                                {% if gbpRate.rate_non_cash_buy == highGbpBuy %}<b>{% endif %}
+                                    {{ gbpRate.rate_non_cash_buy }}
+                                    {% if gbpRate.rate_non_cash_buy == highGbpBuy %}</b>{% endif %}
+                            </td>
+                            <td class="content__table-currency-rates">
+                                {% if gbpRate.rate_non_cash_sell == lowGbpSell %}<b>{% endif %}
+                                    {{ gbpRate.rate_non_cash_sell }}
+                                    {% if gbpRate.rate_non_cash_sell == lowGbpSell %}</b>{% endif %}
+                            </td>
+                            {% set hasGbp = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if hasGbp == false %}
+                        <td class="content__table-currency-rates">-</td>
+                        <td class="content__table-currency-rates">-</td>
+                    {% endif %}
+
+                    {% if currentBank != bank.bankId %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            {% elseif app.request.attributes.get('slug')=='cash' and  app.request.attributes.get('type')=='direct' %}
+                <thead>
+                <tr>
+                    <th rowspan="2" width="190">{% trans %}Բանկ{% endtrans %}</th>
+                    <th colspan="2" class="content__table-currency-symbol">USD&nbsp;&nbsp;&nbsp;$</th>
+                    <th colspan="2" class="content__table-currency-symbol">EUR&nbsp;&nbsp;&nbsp;&euro;</th>
+                    <th colspan="2" class="content__table-currency-symbol">RUB&nbsp;&nbsp;&nbsp;&#x20bd;</th>
+                    <th colspan="2" class="content__table-currency-symbol">GBP&nbsp;&nbsp;&nbsp;&pound;</th>
+                </tr>
+                <tr>
+                    <th class="content__table-currency-buy-sell">{% trans %}Առք{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Վաճ{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Առք{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Վաճ{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Առք{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Վաճ{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Առք{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}Վաճ{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set currentBank = null %}
+                {% for bank in banks %}
+                    {% if currentBank != bank.bankId %}
+                        <tr>
+                        <td class="content__table-currency-bank-name">
+                            <div class="content__table-currency-logo bank-logos {{ bank.bankSlug }}-24"></div>
+                            <div class="content__table-currency-name">
+                                <a href="{{ path('bank_banks_branches', {'bankSlug': bank.bankSlug}) }}">{{ bank.bankTitle }}</a><br>
+
+                                {% if dateTime %}
+                                    <span title="{{ 'Թարմացված է՝'|trans }} {{ dateTime|date('d.m.Y H:i') }}">{{ dateTime|date('d.m.Y H:i') }}</span>
+                                {% else %}
+                                    {% if bank.bankId != 13 %}
+                                        <span title="{{ 'Թարմացված է՝'|trans }} {{ rateUpdatDate|date('d.m.Y H:i') }}">{{ rateUpdatDate|date('d.m.Y H:i') }}</span>
+                                    {% else %}
+                                        <span title="{{ 'Թարմացված է՝'|trans }} {{ rateHSBCUpdatDate|date('d.m.Y H:i') }}">{{ rateHSBCUpdatDate|date('d.m.Y H:i') }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </td>
+                    {% endif %}
+
+                    {% set currentBank = bank.bankId %}
+
+                    {% set hasUsd = false %}
+                    {% for usdRate in rates %}
+                        {% if usdRate.currency_id == 1 and usdRate.bank_id == currentBank %}
+                            <td class="content__table-currency-rates">
+                                {% if usdRate.rate_buy == highUsdBuy %}<b>{% endif %}
+                                    {{ usdRate.rate_buy }}
+                                    {% if usdRate.rate_buy == highUsdBuy %}</b>{% endif %}
+                            </td>
+                            <td class="content__table-currency-rates">
+                                {% if usdRate.rate_sell == lowUsdSell %}<b>{% endif %}
+                                    {{ usdRate.rate_sell }}
+                                    {% if usdRate.rate_sell == lowUsdSell %}</b>{% endif %}
+                            </td>
+                            {% set hasUsd = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if hasUsd == false %}
+                        <td class="content__table-currency-rates">-</td>
+                        <td class="content__table-currency-rates">-</td>
+                    {% endif %}
+
+                    {% set hasEur = false %}
+                    {% for eurRate in rates %}
+                        {% if eurRate.currency_id == 10 and eurRate.bank_id == currentBank %}
+                            <td class="content__table-currency-rates">
+                                {% if eurRate.rate_buy == highEurBuy %}<b>{% endif %}
+                                    {{ eurRate.rate_buy }}
+                                    {% if eurRate.rate_buy == highEurBuy %}</b>{% endif %}
+                            </td>
+                            <td class="content__table-currency-rates">
+                                {% if eurRate.rate_sell == lowEurSell %}<b>{% endif %}
+                                    {{ eurRate.rate_sell }}
+                                    {% if eurRate.rate_sell == lowEurSell %}</b>{% endif %}
+                            </td>
+                            {% set hasEur = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if hasEur == false %}
+                        <td class="content__table-currency-rates">-</td>
+                        <td class="content__table-currency-rates">-</td>
+                    {% endif %}
+
+                    {% set hasRub = false %}
+                    {% for rubRate in rates %}
+                        {% if rubRate.currency_id == 51 and rubRate.bank_id == currentBank %}
+                            <td class="content__table-currency-rates">
+                                {% if rubRate.rate_buy == highRubBuy %}<b>{% endif %}
+                                    {{ rubRate.rate_buy }}
+                                    {% if rubRate.rate_buy == highRubBuy %}</b>{% endif %}
+                            </td>
+                            <td class="content__table-currency-rates">
+                                {% if rubRate.rate_sell == lowRubSell %}<b>{% endif %}
+                                    {{ rubRate.rate_sell }}
+                                    {% if rubRate.rate_sell == lowRubSell %}</b>{% endif %}
+                            </td>
+                            {% set hasRub = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if hasRub == false %}
+                        <td class="content__table-currency-rates">-</td>
+                        <td class="content__table-currency-rates">-</td>
+                    {% endif %}
+
+                    {% set hasGbp = false %}
+                    {% for gbpRate in rates %}
+                        {% if gbpRate.currency_id == 2 and gbpRate.bank_id == currentBank %}
+                            <td class="content__table-currency-rates">
+                                {% if gbpRate.rate_buy == highGbpBuy %}<b>{% endif %}
+                                    {{ gbpRate.rate_buy }}
+                                    {% if gbpRate.rate_buy == highGbpBuy %}</b>{% endif %}
+                            </td>
+                            <td class="content__table-currency-rates">
+                                {% if gbpRate.rate_sell == lowGbpSell %}<b>{% endif %}
+                                    {{ gbpRate.rate_sell }}
+                                    {% if gbpRate.rate_sell == lowGbpSell %}</b>{% endif %}
+                            </td>
+                            {% set hasGbp = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if hasGbp == false %}
+                        <td class="content__table-currency-rates">-</td>
+                        <td class="content__table-currency-rates">-</td>
+                    {% endif %}
+
+                    {% if currentBank != bank.bankId %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            {% elseif app.request.attributes.get('type')=='crossed' %}
+                <thead>
+                <tr>
+                    <th width="165">{% trans %}Բանկ{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}EUR/USD{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}USD/EUR{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}EUR/RUB{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}RUB/EUR{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}USD/RUR{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}RUR/USD{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}GBP/EUR{% endtrans %}</th>
+                    <th class="content__table-currency-buy-sell">{% trans %}EUR/GBP{% endtrans %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set currentBank = null %}
+                {% for bank in banks %}
+                    {% if currentBank != bank.bankId %}
+                        <tr>
+                            <td class="content__table-currency-bank-name">
+                                <div class="content__table-currency-logo bank-logos {{ bank.bankSlug }}-24"></div>
+                                <div class="content__table-currency-name">
+                                    <a href="{{ path('bank_banks_branches', {'bankSlug': bank.bankSlug}) }}">{{ bank.bankTitle }}</a><br>
+
+                                    {% if dateTime %}
+                                        <span title="{{ 'Թարմացված է՝'|trans }} {{ dateTime|date('d.m.Y H:i') }}">{{ dateTime|date('d.m.Y H:i') }}</span>
+                                    {% else %}
+                                        {% if bank.bankId != 13 %}
+                                            <span title="{{ 'Թարմացված է՝'|trans }} {{ rateUpdatDate|date('d.m.Y H:i') }}">{{ rateUpdatDate|date('d.m.Y H:i') }}</span>
+                                        {% else %}
+                                            <span title="{{ 'Թարմացված է՝'|trans }} {{ rateHSBCUpdatDate|date('d.m.Y H:i') }}">{{ rateHSBCUpdatDate|date('d.m.Y H:i') }}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </td>
+                            {% for key,rate in rates %}
+                                    {% if key==bank.bankId %}
+                                            {% if rate == null %}
+                                                {% for i in 0..7  %}
+                                                    <td class="content__table-currency-rates">-</td>
+                                                {% endfor %}
+                                            {% else %}
+                                                {% for rateVal in rate %}
+                                                    {% if rateVal!=null %}
+                                                        <td class="content__table-currency-rates">{{ rateVal }}</td>
+                                                    {% else %}
+                                                            <td class="content__table-currency-rates">-</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            {% endif %}
+        </table>
+    </div>
+    <div class="gap-80"></div>
+    {#<h3 class="text-center">{{  'Last news'|trans }}</h3>#}
+    <h2 class="text-center text-bold"
+        style="padding-bottom: 20px;">{% trans %}Ֆինանսական նորություններ{% endtrans %}</h2>
+    <div class="finans-news-content">
+        {% for new in news %}
+            <div class="finans-news">
+                <div class="item-image">
+                    <a href="{{ path('news_view', {'newsSlug': new.newsSlug}) }}">
+                        <div class="news-header min-height-70">
+                            <h3 style="font-size: 15px;">{{ new.newsTitle|slice(0, 250) }}</h3>
+                            {#<p>{{ new.newsDate|date('d.m.Y') }}</p>#}
+                        </div>
+                        <img class="img-responsive width-100" src="{{ asset(new.newsOgImage|get_thumb) }}"
+                             alt="{{ new.newsTitle }}">
+                    </a>
+                </div>
+                <div class="gap-15"></div>
+                {#<p>{{ new.newsText|striptags|slice(1, 250)  }} ...</p>#}
+                {#<a href="{{ path('news_view', {'newsSlug': new.newsSlug}) }}" class="btn btn-success width-p-100 btn-filter">Ավելին</a>#}
+            </div>
+        {% endfor %}
+        <p class="watch-all-news-label"><a href="{{ path('news_list') }}">{{ 'Դիտել բոլորը'|trans }}</a></p>
+    </div>
+    {#<div class="gap-20"></div>#}
+    {#<div class="row">#}
+    {#{% for new in news %}#}
+    {#<div class="col-md-4">#}
+    {#<h3><a href="{{ path('news_view', {'newsSlug': new.newsSlug}) }}">{{ new.newsTitle }}</a></h3>#}
+    {#<div class="item-image">#}
+    {#<a href="{{ path('news_view', {'newsSlug': new.newsSlug}) }}" >#}
+    {#<img class="img-responsive" src="{{ asset(new.newsOgImage|get_thumb) }}">#}
+    {#</a>#}
+    {#</div>#}
+    {#<div class="gap-15"></div>#}
+    {#<p>{{ new.newsDate|date('d.m.Y') }}</p>#}
+    {#<p>{{ new.newsText|striptags|slice(1, 250)  }} ...</p>#}
+    {#<a href="{{ path('news_view', {'newsSlug': new.newsSlug}) }}" class="btn btn-success width-p-100 btn-filter">Ավելին</a>#}
+    {#</div>#}
+    {#{% endfor %}#}
+    {#</div>#}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/datatables/datatables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/moment.js') }}" type="text/javascript"></script>
+    {{ parent() }}
+    {#<script>$('.carousel').carousel();</script>#}
+{% endblock %}

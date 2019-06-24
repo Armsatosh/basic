@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{% 
+    set metaParams = {
+        'title': page.pageTitle,
+        'description': page.pageMetaDescription,
+        'keywords': page.pageMetaKeywords,
+        'ogImage': ogImage,
+    }
+%}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ page.pageTitle }}</h2>
+    <div class="gap-30"></div>
+    <div class="credit__filter">
+        {{ form_start(form) }}
+        <div class="col-md-4 no-padding">
+            <label>{% trans %}Համակարգ{% endtrans %}</label>
+            {{ form_widget(form.method, {'attr': {'class': 'form-control width-p-100'}}) }}
+        </div>
+        <div class="col-md-4 no-padding">
+            <label>{% trans %}Արժույթ{% endtrans %} *</label>
+            {{ form_widget(form.currency, {'attr': {'class': 'form-control width-p-100'}}) }}
+        </div>
+        <div class="col-md-4 no-padding">
+            <label>&nbsp;</label>
+            {{ form_widget(form.filter, {'attr': {'class': 'btn btn-success width-p-100 new-button'}}) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-15"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="font-12">{% trans %}* -ով նշված դաշտերը պարտադիր լրացման ենթական են։{% endtrans %}</p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-30"></div>
+    {% if banks is not empty %}
+    <div class="content__currency-container">
+        <table class="content__table content__table-credit">
+            <thead>
+                <tr>
+                    <td>{% trans %}ՀՀ{% endtrans %}</td>
+                    <td>{% trans %}Բանկ{% endtrans %}</td>
+                    <td>{% trans %}Միջնորդ. Ֆիքսված{% endtrans %}</td>
+                    <td>{% trans %}Միջնորդ. Տոկոս{% endtrans %}</td>
+                    <td>{% trans %}Մին. Միջնորդ.{% endtrans %}</td>
+                    <td>{% trans %}Մաքս. Միջնորդ.{% endtrans %}</td>
+                    <td>{% trans %}Այլ Պայմաններ{% endtrans %}</td>
+                    <td colspan="2">{% trans %}Հղում{% endtrans %}</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% set rc = 1 %}
+                {% for bank in banks %}
+                    <tr>
+                        <td>
+                            {% if rc < 10 %}
+                                0{{ rc }}
+                            {% else %}
+                                {{ rc }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="content__table-currency-logo">
+                                <img src="{{ asset('img/bank-logos/24x24/'~bank.bankSlug~'-24.png') }}"  />
+                            </div>
+                            <div class="content__table-currency-name">
+                                {{ bank.bankTitle }}<br>
+                                <span title="Թարմացված է՝ {{ bank.transferUpdateDate|date('d.m.Y') }}">{{ bank.transferUpdateDate|date('d.m.Y') }}</span>
+                            </div>
+                        </td>
+                        <td style="text-align: center;">
+                            {% if bank.transferComMin == bank.transferComMax %}
+                                {{ bank.transferComMin }}
+                            {% else %}
+                                 - 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if bank.transferComPercent is not empty %}
+                            {{ bank.transferComPercent }}
+                            {% else %}
+                             - 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if bank.transferComMin != bank.transferComMax %}
+                            {{ bank.transferComMin }}
+                            {% else %}
+                             - 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if bank.transferComMin != bank.transferComMax %}
+                            {{ bank.transferComMax }}
+                            {% else %}
+                             - 
+                            {% endif %}
+                        </td>
+                        <td>{{ bank.transferOtherConditions }}</td>
+                        <td style="width: 30px !important;">
+                            <a class="content__table-link" style="padding-top: 10px;" href="{{ asset(bank.transferLink|raw) }}"><i class="fa fa-link"></i></a>
+                        </td>
+                        <td style="width: 30px !important;">
+                            <a class="content__table-link collapse-button" style="padding-top: 4px;" role="button" data-toggle="collapse" href="#collapseAcba{{ bank.bankSlug }}{{ bank.transferId }}" aria-expanded="true" aria-controls="collapseAcba{{ bank.bankSlug }}{{ bank.transferId }}"><i class="fa fa-angle-down"></i></a>
+                        </td>
+                    </tr>
+                    <tr class="content__table-row-collaplse collapse" id="collapseAcba{{ bank.bankSlug }}{{ bank.transferId }}">
+                        <td colspan="9">
+                            {{ bank.transferDescription }}
+                        </td>
+                    </tr>
+                    {% set rc = rc + 1 %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="gap-20"></div>
+    {% endif %}
+    <div class="col-md-12">
+        {{ page.pageText|raw }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/datatables/datatables.min.js') }}" type="text/javascript"></script>
+{% endblock %}

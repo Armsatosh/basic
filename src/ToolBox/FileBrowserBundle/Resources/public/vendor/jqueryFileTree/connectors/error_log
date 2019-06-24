@@ -1,0 +1,4 @@
+[29-Apr-2016 11:51:41 America/Denver] PHP Notice:  Use of undefined constant ROOT_DIR - assumed 'ROOT_DIR' in /home4/merchav0/public_html/toolbox/araratcement/admin/vendor/jqueryFileTree/connectors/jqueryFileTree.php on line 21
+[30-Apr-2016 14:28:14 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home4/merchav0/public_html/toolbox/araratcement/admin/vendor/jqueryFileTree/connectors/jqueryFileTree.php on line 37
+[30-Apr-2016 14:28:20 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home4/merchav0/public_html/toolbox/araratcement/admin/vendor/jqueryFileTree/connectors/jqueryFileTree.php on line 37
+[30-Apr-2016 14:28:34 America/Denver] PHP Parse error:  syntax error, unexpected '}' in /home4/merchav0/public_html/toolbox/araratcement/admin/vendor/jqueryFileTree/connectors/jqueryFileTree.php on line 37

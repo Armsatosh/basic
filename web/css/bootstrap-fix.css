@@ -1,0 +1,54 @@
+/*   Buttons   */
+.btn { 
+    border-radius: 0px;
+    transition: all 0.3s;
+}
+.btn-success {
+    background-color: #bada55;
+    border-color: #a2bb54;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active, 
+.btn-success.active,
+.btn-success.active.focus, 
+.btn-success.active:focus, 
+.btn-success.active:hover, 
+.btn-success:active.focus, 
+.btn-success:active:focus, 
+.btn-success:active:hover, 
+.open>.dropdown-toggle.btn-success.focus, 
+.open>.dropdown-toggle.btn-success:focus, 
+.open>.dropdown-toggle.btn-success:hover {
+    background-color: #9cb747;
+    border-color: #a2bb54;
+}
+
+.btn-thick { padding: 12px; }
+
+.input-group-addon {
+    border-radius: 0px;
+    background-color: #bada55;
+}
+
+.credit__filter label { display: block; text-align: left; }
+.credit__filter .form-control {
+    padding: 6px 2px;
+    border-radius: 0;
+}
+/*.credit__filter .btn {
+    padding: 10px 12px;
+}*/
+
+/*.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}*/

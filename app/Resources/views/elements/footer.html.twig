@@ -1,0 +1,50 @@
+<footer class="container-footer ">
+    <div class="gap-30"></div>
+    <div class="row">
+        <div class="flex-content">
+            <div class="col-md-8 col-sm-8 col-xs-8 footer__copyright">
+                <p>
+                    {{ 'Կայքում տեղադրված բոլոր տվյալները վերցվում են համապատասխան ընկերությունների պաշտոնական կայքերից: Bankinfo.am-ը պատասխանատվություն չի կրում տվյալների հավաստիության և օգտագործման հնարավոր հետևանքների համար:'|trans }}
+                    <br>
+                    {{ 'Կայքի որևէ տեղեկատվության վերաբերյալ տարբեր լեզուներում անհամապատասխանության դեպքում, խնդրում ենք առաջնորդվել հայերեն տարբերակով: Բոլոր իրավունքները պաշտպանված են:'|trans }}
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="row footer__logos">
+                    <div class="col-md-8 col-sm-8 col-xs-8 no-padding">
+                        <a href="http://www.adgf.am/" target="_blank">
+                            <div class="footer__logos-image">
+                                <img src="{{ asset('img/design-elements/adgf.gif') }}" class="img-responsive"/>
+                            </div>
+                            <div class="footer__logos-text">
+                                {{ 'ՖԻԶԻԿԱԿԱՆ ԱՆՁԱՆՑ ԲԱՆԿԱՅԻՆ'|trans }}<br>{{ 'ԱՎԱՆԴՆԵՐԻ ՀԱՏՈՒՑՈՒՄԸ'|trans }}
+                                <br>{{ 'ԵՐԱՇԽԱՎՈՐՈՂ ՀԻՄՆԱԴՐԱՄ' |trans }}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4  col-sm-4 col-xs-4 no-padding">
+                        <a href="http://fsm.am/" target="_blank">
+                            <div class="footer__logos-image">
+                                <img src="{{ asset('img/design-elements/fsm.gif') }}" class="img-responsive"/>
+                            </div>
+                            <div class="footer__logos-text">
+                                <p>{{ 'ՖԻՆԱՆՍԱԿԱՆ'|trans }} <br> {{ 'ՀԱՄԱԿԱՐԳԻ'|trans }} <br> {{ 'ՀԱՇՏԱՐԱՐ'|trans }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gap-15"></div>
+    <div class="row">
+            <div class="col-md-8 col-sm-4 col-xs-8 footer__copyright">
+                <p>&copy; {% trans %}Այ Թի Կոմպլեքս ՍՊԸ{% endtrans %} 2012 - {{ 'now'|date('Y') }} | {{ 'Հեռ:'|trans }}
+                     +374
+                    60 46 60 60</p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4 footer__creator">
+                <p>Design & Development by <a href="http://www.toolbox.am" target="_blank">ToolBox Software</a></p>
+            </div>
+    </div>
+</footer>

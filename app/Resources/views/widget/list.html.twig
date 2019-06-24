@@ -1,0 +1,252 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{%
+    set metaParams = {
+    'title': page.pageTitle,
+    'description': page.pageMetaDescription,
+    'keywords': page.pageMetaKeywords,
+    'ogImage': ogImage,
+}
+%}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/widget.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-colorpicker.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ page.pageTitle }}</h2>
+    <div class="gap-20"></div>
+    <div class="row">
+        <div class="col-md-12">{{ page.pageText|raw }}</div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-35"></div>
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="col-md-12 no-padding">
+                <div class="widget-description">
+                    <div class="widget-description-block">
+                        <h3>{{ 'Կցորդի գույն'|trans }}</h3>
+                        <div class="widget-color-block wi">
+
+                            <div style="display: flex;margin-right: 10px">
+                                <span>{{ 'Ետին Պլան'|trans }}</span>
+                                <label for="widget-color-pick" id="color-value"></label>
+                                <label id="colo-value-label">#ffffff<span></span></label>
+                                <input style="display: none" type="color" id="widget-color-pick" onchange="getWidgetColor(this)" value="#ffffff">
+                            </div>
+
+                            <div style="display: none">
+                                <span>{{ 'Տեքստի գույն'|trans }}</span>
+                                <label for="widget-color-pick-fonts" id="color-value-fonts"></label>
+                                <label id="colo-value-label-fonts">#000000<span></span></label>
+                                <input style="display: none" type="color" id="widget-color-pick-fonts" onchange="getWidgetColorFonts(this)" value="#000000">
+                            </div>
+                            {#<span>#}
+                                {#<label for="widget-color-light" class="checker-color-design checker color-light activeC">#}
+                                    {#<i class="fa fa-check"></i>#}
+                                {#</label>#}
+                                {#<input class="widget-color" style="display: none" checked type="radio" name="widget-color" id="widget-color-light" value="light" />#}
+
+                                {#<label for="widget-color-light">{{ 'Բաց'|trans }}</label>#}
+                            {#</span>#}
+
+                            {#<span>#}
+                                {#<label for="widget-color-dark" class="checker-color-design checker color-dark notActiveC">#}
+                                    {#<i class="fa fa-check"></i>#}
+                                {#</label>#}
+                                {#<input class="widget-color" style="display: none" type="radio" name="widget-color" id="widget-color-dark" value="dark"           />#}
+
+                                {#<label for="widget-color-dark">{{ 'Մուգ'|trans }}</label>#}
+                            {#</span>#}
+                            {##}
+                        </div>
+                    </div>
+
+                    <div class="widget-description-block" style="display: none">
+                    {#<div class="widget-description-block" style="display: block">#}
+                        <h3>{{ 'Կցորդի լեզու'|trans }}</h3>
+                        <div class="widget-language-block wi">
+                            <input type="hidden" value="{{ app.request.attributes.get('_locale') }}" id="current-language">
+                            <span>
+                                <label for="widget-language-hy" class="checker-lang-design checker hy-lang activeL">
+                                    <i class="fa fa-check"></i>
+                                </label>
+
+                                <input class="widget-language hy" style="display: none" type="radio" name="widget-language" id="widget-language-hy" value="hy" />
+                                <label for="widget-language-hy">{{ 'Հայերեն'|trans }}</label>
+                            </span>
+                            <span>
+                                <label for="widget-language-en" class="checker-lang-design checker en-lang notActiveL">
+                                    <i class="fa fa-check"></i>
+                                </label>
+
+                                <input class="widget-language en" style="display: none" type="radio" name="widget-language" id="widget-language-en" value="en" />
+                                <label for="widget-language-en">{{ 'Անգլերեն'|trans }}</label>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="widget-description-block">
+                        <h3>{{ 'Կցորդի չափ'|trans }}</h3>
+                        <div class="widget-size-block wi">
+                            <div style="display: block;margin-right: 10px">
+                                <div style="display: block;width: 100%">{{ 'Բարձրություն'|trans }} (135~∞px)</div>
+                                <input type="text" class="form-control" id="widget-height">
+                            </div>
+                            <div style="display: block;margin-right: 10px">
+                                <div style="display: block;width: 100%">{{ 'Լայնություն'|trans }} (215~840px)</div>
+                                <input type="text" class="form-control" id="widget-width">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-description-block">
+                        <div class="widget-link-block">
+                            <p id="widget-link" class="link-space"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12 no-padding">
+
+
+                <div class="widget-container ">
+
+                        <img src="{{ asset('img/design-elements/logo-small.png') }}" alt="BankInfo" title="BankInfo" class="smallLogo">
+
+                        <div id="data-tabs-container">
+                            <a class="widget-text data-tab-open topen" id="jb" href="#else" style="border-bottom: 1px solid white;background:white" >{{ 'Բանկեր'|trans }}</a>
+                            <a class="widget-text data-tab-open" id="cb" href="#kb" style="background: #eaeaea">{{ 'ՀՀ ԿԲ'|trans }}</a>
+                        </div>
+
+                        <div class="tab-content">
+                            <div id="else" class="tab-pane in active">
+                                <div class="tab-content" id="tab-content-arq-vacharq">
+
+
+                                    <div id="vachar_" class="tab-pane fade">
+
+                                        <table class="widget-table">
+
+                                            <tbody id="widget-table-container-table-1" class="widget-text">
+
+                                            {% set index = 0 %}
+                                            {% for vacharq in vacharqs %}
+
+                                                {% if index == 0 %}
+                                                    <span id="change-date">{{ sellMaxDate.r_update_date }}</span>
+                                                    <a href="https://bankinfo.am/" id="more" target="_blank">{{ 'Դիտել Ավելին'|trans }}</a>
+                                                {% endif %}
+
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ asset(vacharq.bank_logo) }}" alt="" width="13px">
+                                                        <a class="widget-text bank-name-translatable" target="_blank" href="https://bankinfo.am/">
+                                                            {% if app.request.locale == "en" %}
+                                                                {{ vacharq.bank_trans }}
+                                                            {% else %}
+                                                                {{ vacharq.bank_title }}
+                                                            {% endif %}
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ vacharq.currency_symbol }}</td>
+                                                    <td>{{ vacharq.rate_sell }}</td>
+                                                </tr>
+                                                {% set index = 1 %}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div id="arq_" class="tab-pane in active">
+
+                                        <table class="widget-table">
+
+                                            <tbody id="widget-table-container-table-2" class="widget-text">
+
+                                            {% set index = 0 %}
+                                            {% for arq in arqs %}
+
+                                                {% if index == 0 %}
+                                                    <span id="change-date">{{ buyMaxDate.r_update_date }}</span>
+                                                    <a href="https://bankinfo.am/" id="more" target="_blank">{{ 'Դիտել Ավելին'|trans }}</a>
+                                                {% endif %}
+
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ asset(arq.bank_logo) }}" alt="" width="13px">
+                                                        <a class="widget-text bank-name-translatable"  target="_blank" href="https://bankinfo.am/" data-translation="{{ arq.bank_trans }}">
+                                                        {% if app.request.locale == "en" %}
+                                                            {{ arq.bank_trans }}
+                                                        {% else %}
+                                                            {{ arq.bank_title }}
+                                                        {% endif %}
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ arq.currency_symbol }}</td>
+                                                    <td>{{ arq.rate_buy }}</td>
+                                                </tr>
+                                                {% set index = 1 %}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                                <div id="data-tabs-container1">
+                                    <a class="widget-text data-tab-open yopen" id="arq" href="#arq_" style="background: white">
+                                        <span>{{ 'Առք.'|trans }}</span>
+                                    </a>
+                                    <a class="widget-text data-tab-open" id="vacharq" href="#vachar_" style="background: #eaeaea;border-bottom: none!important;">
+                                        <span>{{ 'Վաճ.'|trans }}</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div id="kb" class="tab-pane fade fade">
+                                <table class="widget-table">
+                                    <tbody id="widget-table-container-table" class="widget-text">
+                                        {{ render(controller('AppBundle:Data:cbaRatesWidget')) }}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-35"></div>
+    <div class="row">
+        <div class="col-md-12 branch-container"></div>
+    </div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/widget.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
+{% endblock %}

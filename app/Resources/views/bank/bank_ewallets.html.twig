@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{% 
+    set metaParams = {
+        'title': page.pageTitle,
+        'description': page.pageMetaDescription,
+        'keywords': page.pageMetaKeywords,
+        'ogImage': ogImage,
+    }
+%}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ page.pageTitle }}</h2>
+    <div class="gap-30"></div>
+    <div class="credit__filter">
+        {{ form_start(form) }}
+        <div class="col-md-8 no-padding">
+            <label>{% trans %}Էլ. դրամապանակ{% endtrans %} *</label>
+            {{ form_widget(form.wallet, {'attr': {'class': 'form-control width-p-100'}}) }}
+        </div>
+        <div class="col-md-4 no-padding">
+            <label>&nbsp;</label>
+            {{ form_widget(form.filter, {'attr': {'class': 'btn btn-success width-p-100 new-button'}}) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-15"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="font-12">{% trans %}* -ով նշված դաշտերը պարտադիր լրացման ենթական են։{% endtrans %}</p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-30"></div>
+    {% if banks is not empty %}
+    <div class="content__currency-container">
+        <table class="content__table content__table-credit">
+            <thead>
+                <tr>
+                    <td>ՀՀ</td>
+                    <td style="width: 40%;">{% trans %}Բանկ{% endtrans %}</td>
+                    <td style="width: 25%;">{% trans %}Համալրման միջնորդավճար %{% endtrans %}</td>
+                    <td style="width: 25%;">{% trans %}Կանխիկացման միջնորդավճար %{% endtrans %}</td>
+                    <td>{% trans %}Հղում{% endtrans %}</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% set rc = 1 %}
+                {% for bank in banks %}
+                    <tr>
+                        <td>
+                            {% if rc < 10 %}
+                                0{{ rc }}
+                            {% else %}
+                                {{ rc }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="content__table-currency-logo">
+                                <img src="{{ asset('img/bank-logos/24x24/'~bank.bankSlug~'-24.png') }}"  />
+                            </div>
+                            <div class="content__table-currency-name">
+                                {{ bank.bankTitle }}<br>
+                                <span title="{% trans %}Թարմացված է՝{% endtrans %} {{ bank.ewalletRateUpdateDate|date('d.m.Y') }}">{{ bank.ewalletRateUpdateDate|date('d.m.Y') }}</span>
+                            </div>
+                        </td>
+                        <td style="text-align: center;">
+                            {{ bank.ewalletRateRefill }}%
+                        </td>
+                        <td style="text-align: center;">
+                            {{ bank.ewalletRateWithdraw }}%
+                        </td>
+                        <td style="width: 30px !important;">
+                            <a class="content__table-link" style="padding-top: 10px;" href="{{ asset(bank.ewalletRateLink|raw) }}"><i class="fa fa-link"></i></a>
+                        </td>
+                    </tr>
+                    {% set rc = rc + 1 %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="gap-20"></div>
+    {% endif %}
+    <div class="col-md-12">
+        {{ page.pageText|raw }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/datatables/datatables.min.js') }}" type="text/javascript"></script>
+{% endblock %}

@@ -1,0 +1,247 @@
+{% extends 'widget-base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/widget.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-colorpicker.min.css') }}">
+
+
+    <style>
+        body, a {
+            color: #333;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block body %}
+<div class="widget-container " style="width: {{ size_width }}px;height: {{ size_height }}px">
+
+    <img src="{{ asset('img/design-elements/logo-small.png') }}" alt="BankInfo" title="BankInfo" class="smallLogo">
+
+    <div id="data-tabs-container">
+        <a class="widget-text data-tab-open topen" id="jb" href="#else" style="border-bottom: 1px solid white;background:white" >{{ 'Բանկեր'|trans }}</a>
+        <a class="widget-text data-tab-open" id="cb" href="#kb" style="background: #eaeaea">{{ 'ՀՀ ԿԲ'|trans }}</a>
+    </div>
+
+    <div class="tab-content">
+        <div id="else" class="tab-pane in active">
+            <div class="tab-content" id="tab-content-arq-vacharq">
+
+
+                <div id="vachar_" class="tab-pane fade">
+
+                    <table class="widget-table">
+
+                        <tbody id="widget-table-container-table-1" class="widget-text">
+
+                        {% set index = 0 %}
+                        {% for vacharq in vacharqs %}
+
+                            {% if index == 0 %}
+                                <span id="change-date">{{ sellMaxDate.r_update_date }}</span>
+                                <a href="https://bankinfo.am/" id="more" target="_blank">{{ 'Դիտել Ավելին'|trans }}</a>
+                            {% endif %}
+
+                            <tr>
+                                <td>
+                                    <img src="{{ asset(vacharq.bank_logo) }}" alt="" width="13px">
+                                    <a class="widget-text bank-name-translatable" target="_blank" href="https://bankinfo.am/">
+                                        {% if app.request.locale == "en" %}
+                                            {{ vacharq.bank_trans }}
+                                        {% else %}
+                                            {{ vacharq.bank_title }}
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>{{ vacharq.currency_symbol }}</td>
+                                <td>{{ vacharq.rate_sell }}</td>
+                            </tr>
+                            {% set index = 1 %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="arq_" class="tab-pane in active">
+
+                    <table class="widget-table">
+
+                        <tbody id="widget-table-container-table-2" class="widget-text">
+
+                        {% set index = 0 %}
+                        {% for arq in arqs %}
+
+                            {% if index == 0 %}
+                                <span id="change-date">{{ buyMaxDate.r_update_date }}</span>
+                                <a href="https://bankinfo.am/" id="more" target="_blank">{{ 'Դիտել Ավելին'|trans }}</a>
+                            {% endif %}
+
+                            <tr>
+                                <td>
+                                    <img src="{{ asset(arq.bank_logo) }}" alt="" width="13px">
+                                    <a class="widget-text bank-name-translatable"  target="_blank" href="https://bankinfo.am/" data-translation="{{ arq.bank_trans }}">
+                                        {% if app.request.locale == "en" %}
+                                            {{ arq.bank_trans }}
+                                        {% else %}
+                                            {{ arq.bank_title }}
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>{{ arq.currency_symbol }}</td>
+                                <td>{{ arq.rate_buy }}</td>
+                            </tr>
+                            {% set index = 1 %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div id="data-tabs-container1">
+                <a class="widget-text data-tab-open yopen" id="arq" href="#arq_" style="background: white">
+                    <span>{{ 'Առք.'|trans }}</span>
+                </a>
+                <a class="widget-text data-tab-open" id="vacharq" href="#vachar_" style="background: #eaeaea;border-bottom: none!important;">
+                    <span>{{ 'Վաճ.'|trans }}</span>
+                </a>
+            </div>
+        </div>
+
+        <div id="kb" class="tab-pane fade fade">
+            <table class="widget-table">
+                <tbody id="widget-table-container-table" class="widget-text">
+                {{ render(controller('AppBundle:Data:cbaRatesWidget')) }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/widget.js') }}"></script>
+
+    <script type="text/javascript">
+        var height = '{{ size_height }}'
+        height = parseInt(height);
+        var trHeight = (height - 70) / 4;
+        var trHeight1 = (height - 70) / 4;
+        $('#widget-table-container-table').find('tr').each(function () {
+                $(this).animate({
+                    'height': trHeight + "px"
+                }, 300)
+            })
+        $('#widget-table-container-table-1').find('tr').each(function () {
+                $(this).animate({
+                    'height': trHeight1 + "px"
+                }, 300)
+            })
+        $('#widget-table-container-table-2').find('tr').each(function () {
+                $(this).animate({
+                    'height': trHeight1 + "px"
+                }, 300)
+            })
+
+        var clr = '{{ color_background }}'
+        var widgetBackground = clr;
+
+        $widgetContainer = $('.widget-container');
+        $widgetContainer.css({
+            'background': '#'+clr
+        })
+
+        $('.topen').css({
+            'background': '#'+clr,
+            'border-bottom':'1px solid #'+clr,
+        })
+
+        $('.yopen').css({
+            'background': '#'+clr,
+            'border-right':'1px solid #'+clr,
+        })
+
+
+        $('#jb').click(function () {
+            $(this).removeClass('topen')
+            $('#cb').removeClass('topen')
+            $(this).addClass('topen')
+
+            $(this).css({
+                'text-decoration': 'none',
+                'border-bottom': '1px solid #'+widgetBackground,
+                'background': '#'+widgetBackground
+            })
+
+            $('#cb').css({
+                'text-decoration': 'none',
+                'border-bottom': '1px solid #39b54a',
+                'background': '#eaeaea'
+            })
+        })
+        $('#cb').click(function () {
+            $(this).removeClass('topen')
+            $('#jb').removeClass('topen')
+            $(this).addClass('topen')
+
+            $(this).css({
+                'text-decoration': 'none',
+                'border-bottom': '1px solid #'+widgetBackground,
+                'background': '#'+widgetBackground
+            })
+
+            $('#jb').css({
+                'text-decoration': 'none',
+                'border-bottom': '1px solid #39b54a',
+                'background': '#eaeaea'
+            })
+        })
+
+        $('#arq').click(function () {
+
+            $(this).removeClass('ytopen')
+            $('#vacharq').removeClass('ytopen')
+            $(this).addClass('ytopen')
+
+
+            $(this).css({
+                'text-decoration': 'none',
+                'border-right': '1px solid #'+widgetBackground,
+                'background': '#'+widgetBackground
+            })
+
+            $('#vacharq').css({
+                'text-decoration': 'none',
+                'border-right': '1px solid #39b54a',
+                'background': '#eaeaea'
+            })
+        })
+        $('#vacharq').click(function () {
+
+            $(this).removeClass('ytopen')
+            $('#arq').removeClass('ytopen')
+            $(this).addClass('ytopen')
+
+            $(this).css({
+                'text-decoration': 'none',
+                'border-right': '1px solid #'+widgetBackground,
+                'background': '#'+widgetBackground
+            })
+
+            $('#arq').css({
+                'text-decoration': 'none',
+                'border-right': '1px solid #39b54a',
+                'background': '#eaeaea'
+            })
+        })
+
+
+
+    </script>
+    <script src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
+{% endblock %}
+

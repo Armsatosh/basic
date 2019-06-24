@@ -1,0 +1,159 @@
+{% if bankBranches is not empty %}
+    <div class="credit__bank-list">
+        <div class="credit__bank-list-item">
+            <div class="credit__bank-list-item__preview">
+                <div class="credit__bank-list-item__logo">
+                    <img src="{{ asset('img/bank-logos/24x24/'~bank.bankSlug~'-24.png') }}" />
+                </div>
+                <div class="credit__bank-list-item__title">
+                    <h2>{{ bank.bankTitle }} - <span class="text-right">{% trans %}ՀՎՀՀ{% endtrans %}{% trans %}՝{% endtrans %} {{ bank.bankTinNumber }}</span> - <span class="text-right">SWIFT{% trans %}՝{% endtrans %} {{ bank.bankSwiftCode }}</span></h2>
+                </div>
+                <a class="credit__bank-list-item__toggle" role="button" data-toggle="collapse" href="#collapse{{ bank.bankSlug }}" aria-expanded="false" aria-controls="collapse{{ bank.bankSlug }}">
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <a class="credit__bank-list-item__toggle" role="button" href="{{ bank.bankLink }}" target="_blank" style="width: 75px;">
+                    <i class="fa fa-link"></i>
+                </a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="credit__bank-list-item__content collapse in" id="collapse{{ bank.bankSlug }}">
+                <div class="content__currency-container">
+                    <table class="credit__bank-list-item__content-table">
+                        <thead>
+                            <tr>
+                                <td style="width: 5%;">{% trans %}ՀՀ{% endtrans %}</td>
+                                <td style="width: 15%;">{% trans %}Մասնաճյուղ{% endtrans %}</td>
+                                <td style="width: 40%;">{% trans %}Հասցե{% endtrans %}</td>
+                                <td style="width: 16%;">{% trans %}Կապ{% endtrans %}</td>
+                                <td style="width: 16%;">{% trans %}Աշխ. ժամեր{% endtrans %}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set i = 1 %}
+                            {% for branch in bankBranches %}
+                                <tr>
+                                    <td>{{ i }}</td>
+                                    <td>{{ branch.bankBranchTitle }}</td>
+                                    <td onclick="reinitMap('/maps/4/{{ branch.bankBranchId }}.json',{{ branch.bankBranchLat  }},{{ branch.bankBranchLong  }})" class="branch-address" style="text-align: left">{{ branch.bankBranchAddress }}
+                                    </td>
+                                    <td style="text-align: left;">
+                                        {% for phoneNumber in branch.bankBranchPhones %}
+                                            <div>{{ phoneNumber }}</div>
+                                        {% endfor %}
+                                        {% for email in branch.bankBranchEmails %}
+                                            <div><a href="mailto:{{ email }}">{{ email }}</a></div>
+                                        {% endfor %}
+                                    </td>
+                                    <td style="white-space: pre-wrap;">{{ branch.bankBranchOpenHours }}</td>
+                                </tr>
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+{% endif %}
+{% if bankAtms is not empty %}
+    <div class="credit__bank-list">
+        <div class="credit__bank-list-item">
+            <div class="credit__bank-list-item__preview">
+                <div class="credit__bank-list-item__logo bank-logos {{ bank.bankSlug }}-24"></div>
+                <div class="credit__bank-list-item__title">
+                    <h2>{{ bank.bankTitle }}</h2>
+                </div>
+                <a class="credit__bank-list-item__toggle" role="button" data-toggle="collapse" href="#collapse{{ bank.bankSlug }}" aria-expanded="false" aria-controls="collapse{{ bank.bankSlug }}">
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="credit__bank-list-item__content collapse in" id="collapse{{ bank.bankSlug }}">
+                <div class="content__currency-container">
+                    <table class="credit__bank-list-item__content-table">
+                        <thead>
+                            <tr>
+                                <td style="width: 10%;">{% trans %}ՀՀ{% endtrans %}</td>
+                                <td style="width: 45%;">{% trans %}Հասցե{% endtrans %}</td>
+                                <td style="width: 45%; text-align: left;">{% trans %}Նկարագրություն{% endtrans %}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set i = 1 %}
+                            {% for atm in bankAtms %}
+                                <tr>
+                                    <td>{{ i }}</td>
+                                    <td onclick="reinitMap('/maps/5/{{atm.bankAtmId}}.json',{{atm.bankAtmLat}},{{atm.bankAtmLong}})" class="branch-address">{{ atm.bankAtmAddress }}
+                                    </td>
+                                    <td style="text-align: left;">{{ atm.bankAtmDescription }}</td>
+                                </tr>
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endif %}
+
+{% if creditCompanyBranches is not empty %}
+
+    <div class="credit__bank-list">
+        <div class="credit__bank-list-item">
+            <div class="credit__bank-list-item__preview">
+                <div class="credit__bank-list-item__logo bank-logos {{ creditCompany.creditCompanySlug }}-24"></div>
+                <div class="credit__bank-list-item__title">
+                    <h2>{{ creditCompany.creditCompanyTitle }} - <span class="text-right">{% trans %}ՀՎՀՀ{% endtrans %}{% trans %}՝{% endtrans %} {{ creditCompany.creditCompanyTinNumber }}</span></h2>
+                </div>
+                <a class="credit__bank-list-item__toggle" role="button" data-toggle="collapse" href="#collapse{{ creditCompany.creditCompanySlug }}" aria-expanded="false" aria-controls="collapse{{ creditCompany.creditCompanySlug }}">
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <a class="credit__bank-list-item__toggle" role="button" href="{{ creditCompany.creditCompanyLink }}" target="_blank">
+                    <i class="fa fa-link"></i>
+                </a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="credit__bank-list-item__content collapse in" id="collapse{{ creditCompany.creditCompanySlug }}">
+                <div class="content__currency-container">
+                    <table class="credit__bank-list-item__content-table">
+                        <thead>
+                            <tr>
+                                <td style="width: 5%;">{% trans %}ՀՀ{% endtrans %}</td>
+                                <td style="width: 15%;">{% trans %}Մասնաճյուղ{% endtrans %}</td>
+                                <td style="width: 40%; text-align: left;">{% trans %}Հասցե{% endtrans %}</td>
+                                <td style="width: 16%;">{% trans %}Կապ{% endtrans %}</td>
+                                <td style="width: 16%;">{% trans %}Աշխ. ժամեր{% endtrans %}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set i = 1 %}
+                            {% for branch in creditCompany.creditCompanyBranches %}
+                                <tr>
+                                    <td>{{ i }}</td>
+                                    <td>{{ branch.creditCompanyBranchTitle }}</td>
+                                    <td onclick="reinitMap('/maps/6/{{branch.creditCompanyBranchId}}.json',{{branch.creditCompanyBranchLat}},{{branch.creditCompanyBranchLong}})" class="branch-address" style="text-align: left">{{ branch.creditCompanyBranchAddress }}</td>
+                                    <td style="text-align: left;">
+                                        {% for phoneNumber in branch.creditCompanyBranchPhones %}
+                                            <div>{{ phoneNumber }}</div>
+                                        {% endfor %}
+                                        {% for email in branch.creditCompanyBranchEmails %}
+                                            <div><a href="mailto:{{ email }}">{{ email }}</a></div>
+                                        {% endfor %}
+                                    </td>
+                                    <td style="white-space: pre-wrap;">{{ branch.creditCompanyBranchOpenHours }}</td>
+                                </tr>
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+{% endif %}

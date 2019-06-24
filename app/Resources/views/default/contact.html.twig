@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{% 
+    set metaParams = {
+        'title': page.pageTitle,
+        'description': page.pageMetaDescription,
+        'keywords': page.pageMetaKeywords,
+        'ogImage': ogImage
+    }
+%}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+    
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    
+{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ page.pageTitle }}</h2>
+    <div class="gap-20"></div>
+    <div class="row">
+        {#<div class="col-md-10 col-md-offset-1">#}
+            <div class="contact-top-items-content">
+                <div class="col-md-6 col-sm-6 col-xs-6 contact__item-left">
+                    <span class="contact__icon-left icon__round custom-green-background" style="background: #39b54a">
+                        <i class="fa fa-envelope-o"></i>
+                    </span>
+                    <a href="mailto:info@bankinfo.am" class="contact__item-contact-left bg-light-grey">info@bankinfo.am</a>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 contact__item-left">
+                    <a href="tel:+37460466060" class="contact__item-contact-left bg-light-grey">+374 60 46 60 60</a>
+                    <span class="contact__icon-left icon__round custom-green-background" style="background: #39b54a">
+                        <i class="fa fa-phone"></i>
+                    </span>
+                </div>
+            </div>
+        {#</div>#}
+    </div>
+    <div class="gap-50"></div>
+    <div class="form-contact-content">
+        {{ form_start(form) }}
+        {#<div class="col-md-10 col-md-offset-1">#}
+            <div class="row">
+                <div class="col-md-6 col-xs-6 col-sm-6">
+                    <div class="form-group">
+                        <label>{% trans %}Ձեր անունը{% endtrans %} *</label>
+                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-6  col-xs-6 col-sm-6">
+                    <div class="form-group">
+                        <label>{% trans %}Ձեր էլ. հասցեն{% endtrans %} *</label>
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>{% trans %}Հաղորդագրություն{% endtrans %} *</label>
+                    {{ form_widget(form.message, {'attr': {'rows': 7, 'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="gap-15"></div>
+            <div class="row">
+                <div class="col-md-6  col-xs-6 col-sm-6">
+                    <div class="g-recaptcha" data-sitekey="6LcR06EUAAAAAOJpfjP_xkhhR4PZEE4luihuxfQC"></div>
+                </div>
+                <div class="col-md-12 col-xs-12 col-sm-12" style="margin-top: 12px">
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-success custom-green-background','style':'background:#39b54a;color:white;border:1px solid #39b54a'}}) }}
+                </div>
+            </div>
+        {#</div>#}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

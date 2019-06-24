@@ -1,0 +1,96 @@
+{% extends 'base_json.html.twig' %}
+{% block json %}
+eqfeed_callback({
+    "type": "FeatureCollection",
+    "features": [
+        {% if banks is not empty %}
+            {% for bank in banks %}
+                {% for branch in bank.bankBranches %}
+                {% if  branchId!=0 and branch.bankBranchId== branchId or branchId==0 %}
+                    {
+                    "properties": {
+                        "entityType": 0,
+                        "entityTitle": {
+                            "en": "",
+                            "hy": "{{ bank.bankTitle }} - {{ branch.bankBranchTitle }}"
+                        },
+                        "entityMarker": "{% if bank.bankMapMarker != "" and bank.bankMapMarker is not empty %}{{ asset('img/banks/uploads/'~bank.bankMapMarker|thumb(32,32)) }}{% endif %}",
+                        "entityAddress": {
+                            "en": "",
+                            "hy": "{{ branch.bankBranchAddress }}"
+                        },
+                        {% set phoneDelimiter = "" %}
+                        "entityPhoneNumbers": "{% for phone in branch.bankBranchPhones %}{{ phoneDelimiter~phone }}{% set phoneDelimiter = ", " %}{% endfor %}"{#{{ branch.bankBranchPhones|raw }}#}
+                    },
+                    "geometry": {
+                        "coordinates": {
+                            "lat": {% if branch.bankBranchLat is not empty %}{{ branch.bankBranchLat }}{% else %}""{% endif %},
+                            "long": {% if branch.bankBranchLong is not empty %}{{ branch.bankBranchLong }}{% else %}""{% endif %}
+                        }
+                    }
+                },
+                {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        {% if atms is not empty %}
+            {% for bank in atms %}
+                {% for atm in bank.bankAtms %}
+                    {% if  branchId!=0 and atm.bankAtmId== branchId or branchId==0 %}
+                {
+                    "properties": {
+                        "entityType": 1,
+                        "entityTitle": {
+                            "en": "",
+                            "hy": "{{ bank.bankTitle }} - {{ atm.bankAtmDescription }}"
+                        },
+                        "entityMarker": "{% if bank.bankMapMarker != "" and bank.bankMapMarker is not empty %}{{ asset('img/banks/uploads/'~bank.bankMapMarker|thumb(32,32)) }}{% endif %}",
+                        "entityAddress": {
+                            "en": "",
+                            "hy": "{{ atm.bankAtmAddress }}"
+                        }
+                    },
+                    "geometry": {
+                        "coordinates": {
+                            "lat": {% if atm.bankAtmLat is not empty %}{{ atm.bankAtmLat }}{% else %}""{% endif %},
+                            "long": {% if atm.bankAtmLong is not empty %}{{ atm.bankAtmLong }}{% else %}""{% endif %}
+                        }
+                    }
+                },
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}        
+        {% if credits is not empty %}
+            {% for credit in credits %}
+                {% for branch in credit.creditCompanyBranches %}
+                    {% if  branchId!=0 and branch.creditCompanyBranchId== branchId or branchId==0 %}
+                {
+                    "properties": {
+                        "entityType": 2,
+                        "entityTitle": {
+                            "en": "",
+                            "hy": "{{ credit.creditCompanyTitle }} - {{ branch.creditCompanyBranchTitle }}",
+                        },
+                        "entityMarker": "{% if credit.creditCompanyMapMarker != "" and credit.creditCompanyMapMarker is not empty %}{{ asset('img/credit-companies/uploads/'~credit.creditCompanyMapMarker|thumb(32,32)) }}{% endif %}",
+                        "entityAddress": {
+                            "en": "",
+                            "hy": "{{ branch.creditCompanyBranchAddress }}",
+                        },
+                        {% set phoneDelimiter = "" %}
+                        "entityPhoneNumbers": "{% for phone in branch.creditCompanyBranchPhones %}{{ phoneDelimiter~phone }}{% set phoneDelimiter = ", " %}{% endfor %}"
+                    },
+                    "geometry": {
+                        "coordinates": {
+                            "lat": {% if branch.creditCompanyBranchLat is not empty %}{{ branch.creditCompanyBranchLat }}{% else %}""{% endif %},
+                            "long": {% if branch.creditCompanyBranchLong is not empty %}{{ branch.creditCompanyBranchLong }}{% else %}""{% endif %}
+                        }
+                    }
+                },
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    ]
+});
+{% endblock %}

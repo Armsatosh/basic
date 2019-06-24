@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{% 
+    set metaParams = {
+        'title': page.pageTitle,
+        'description': page.pageMetaDescription,
+        'keywords': page.pageMetaKeywords,
+        'ogImage': ogImage,
+    }
+%}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ page.pageTitle }}</h2>
+    <div class="gap-20"></div>
+    <div class="row">
+        <div class="col-md-12">{{ page.pageText|raw }}</div>
+    </div>    
+    <div class="clearfix"></div>
+    <div class="gap-35"></div>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12 no-padding">
+                <ul class="bank-list">
+                    <li>
+                        <a href="javascript:void(0)" class="active" data-bank="all" onclick="reinitMap('/maps/1/all.json')">{% trans %}Բոլորը{% endtrans %}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="bank-list-container any-change-content">
+                {% set banksTotalCount = 1 %}
+                {% set banksColCount = 1 %}
+                {% set banksPerColItems = (banks|length / 3)|round(0, 'ceil') %}
+                {% for bank in banks %}
+                    {% if banksColCount == 1 %}
+                        <div class="col-md-4 col-sm-4 col-xs-4 no-padding">
+                            <ul class="bank-list">
+                    {% endif %}
+                                <li><a href="javascript:void(0)" data-bank="{{ bank.bankSlug }}" onclick="reinitMap('/maps/1/{{ bank.bankSlug }}.json')">{{ bank.bankTitle }}</a></li>
+                    {% if banksColCount == banksPerColItems or banksTotalCount == banks|length %}    
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% set banksColCount = banksColCount + 1 %}
+                    {% set banksTotalCount = banksTotalCount + 1 %}
+                    {% if banksColCount > banksPerColItems %}
+                        {% set banksColCount = 1 %}
+                    {% endif %}
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="map"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="gap-35"></div>
+    <div class="row">
+        <div class="col-md-12 branch-container"></div>
+    </div>
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var datType = "1";
+        var mapDataUrl = "{{ absolute_url("/maps/1/all.json") }}";
+    </script>
+    <script src="{{asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyBCdpWHjHkN_jslpMm74gvqvF_c-vLhpWU&callback=initMap')}}" async defer></script>
+    <script src="{{asset('js/maps.js')}}" type="text/javascript"></script>
+{% endblock %}

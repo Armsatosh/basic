@@ -1,0 +1,597 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ page.pageTitle }}, {{ currentCurrency|upper }} - {{ currentYear }} | {{ parent() }}{% endblock %}
+
+{% set ogImage = "" %}
+
+{% if page.pageOgImage is not empty %}
+    {% set ogImage = 'img/pages/uploads/'~page.pageOgImage|thumb(1200,630) %}
+{% endif %}
+
+{%
+    set metaParams = {
+        'title': page.pageTitle,
+        'description': page.pageMetaDescription,
+        'keywords': page.pageMetaKeywords,
+        'ogImage': ogImage,
+    }
+%}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{asset('css/skins/square/green.css')}}" rel="stylesheet" />
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="cba-contacts">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <h2 class="content__title">{% trans %}ՀՀ Կենտրոնական Բանկ{% endtrans %}</h2>
+            <ul>
+                <li>{% trans %}ք. Երևան, Վ. Սարգսյան 6{% endtrans %}</li>
+                <li>{% trans %}Հեռ.՝{% endtrans %} +374 10 583841</li>
+                <li>{% trans %}Ֆաքս.՝{% endtrans %} +374 10 523838</li>
+                <li>{% trans %}Էլ. Հասցե՝{% endtrans %} <a href="mailto:mcba@cba.am">mcba@cba.am</a></li>
+                <li>{% trans %}Կայք՝{% endtrans %} <a href="http://www.cba.am" target="_blank">www.cba.am</a></li>
+            </ul>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <img src="/img/design-elements/central-bank-of-armenia.jpg" alt="Central Bank of Armenia" class="img-responsive">
+        </div>
+    </div>
+    <div class="gap-10"></div>
+    <div class="row">
+    <div class="any-change-content">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="form-group">
+                <label>{% trans %}Այլ Փոխարժեքներ{% endtrans %}</label>
+                <select class="form-control" name="cbaChangeCurrency">
+                    <option> --- {% trans %}Ընտրեք արժույթը{% endtrans %} ---</option>
+                    {% for currency in currencies %}
+                        {% if currency.currencySymbol != "USD" and currency.currencySymbol != "EUR" and currency.currencySymbol != "RUB" and currency.currencySymbol != "AMD" %}
+                            {% set selectedCurrency = "" %}
+                            {% if currency.currencySymbol == currentCurrency|upper %}
+                                {% set selectedCurrency = "selected" %}
+                            {% endif %}
+                            <option value="{{ currency.currencySymbol|lower }}" {{ selectedCurrency }}>{{ currency.currencySymbol }} - {{ currency.currencyTitle }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="form-group">
+                <label>{% trans %}Տարեթիվ{% endtrans %}</label>
+                <select class="form-control" name="cbaChangeYear">
+                    {% for year in maxYear..2000 %}
+                        {% set selectedYear = "" %}
+                        {% if year == currentYear %}
+                            {% set selectedYear = "selected" %}
+                        {% endif %}
+                        <option value="{{ year|lower }}" {{ selectedYear }}>{{ year }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="gap-10"></div>
+    <div class="row">
+        <div class="any-change-content">
+
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            {% set usdIcon = '<i class="fa fa-circle-o"></i>' %}
+            {% set usdActive = '' %}
+            {% if currentCurrency|lower == 'usd' %}
+                {% set usdIcon = '<i class="fa fa-check-circle-o"></i>' %}
+                {% set usdActive = 'active' %}
+            {% endif %}
+            <a class="link-radio {{ usdActive }}" href="{{ path('bank_cba', {'year': currentYear, 'currency': 'usd'}) }}">
+                {{ usdIcon|raw }} USD - {% trans %}Ամերիկյան Դոլլար{% endtrans %}
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            {% set rubIcon = '<i class="fa fa-circle-o"></i>' %}
+            {% set rubActive = '' %}
+            {% if currentCurrency|lower == 'rub' %}
+                {% set rubIcon = '<i class="fa fa-check-circle-o"></i>' %}
+                {% set rubActive = 'active' %}
+            {% endif %}
+            <a class="link-radio {{ rubActive }}" href="{{ path('bank_cba', {'year': currentYear, 'currency': 'rub'}) }}">
+                {{ rubIcon|raw }} RUB - {% trans %}Ռուսական Ռուբլի{% endtrans %}
+            </a>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4">
+            {% set eurIcon = '<i class="fa fa-circle-o"></i>' %}
+            {% set eurActive = '' %}
+            {% if currentCurrency|lower == 'eur' %}
+                {% set eurIcon = '<i class="fa fa-check-circle-o"></i>' %}
+                {% set eurActive = 'active' %}
+            {% endif %}
+            <a class="link-radio {{ eurActive }}" href="{{ path('bank_cba', {'year': currentYear, 'currency': 'eur'}) }}">
+                {{ eurIcon|raw }} EUR - {% trans %}Եվրո{% endtrans %}
+            </a>
+        </div>
+        </div>
+    </div>
+    <div class="gap-20"></div>
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="content__currency-container">
+                {% if cba_rates is not empty %}
+                <table class="content__table content__table-cba highlightable">
+                    <thead>
+                        <tr>
+                            <td style="width: 120px;">{% trans %}Օրեր{% endtrans %}</td>
+                            <td>{% trans %}Հունվ. {% endtrans %}</td>
+                            <td>{% trans %}Փետր.  {% endtrans %}</td>
+                            <td>{% trans %}Մարտ   {% endtrans %}</td>
+                            <td>{% trans %}Ապրիլ  {% endtrans %}</td>
+                            <td>{% trans %}Մայիս  {% endtrans %}</td>
+                            <td>{% trans %}Հունիս {% endtrans %}</td>
+                            <td>{% trans %}Հուլիս {% endtrans %}</td>
+                            <td>{% trans %}Օգոս.  {% endtrans %}</td>
+                            <td>{% trans %}Սեպտ.  {% endtrans %}</td>
+                            <td>{% trans %}Հոկտ.  {% endtrans %}</td>
+                            <td>{% trans %}Նոյ.   {% endtrans %}</td>
+                            <td>{% trans %}Դեկտ.  {% endtrans %}</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% set prevVal = [] %}
+                        {% for key, rate in cba_rates %}
+                        <tr>
+                            <td>{{ rate.day }}</td>
+                            {% for i in 1..12 %}
+                                <td>
+                                    {% set zero = 0 %}
+                                    {% if i >=10 %}
+                                        {% set zero = "" %}
+                                    {% endif %}
+
+                                    {% if rate['mn_' ~ i] is not empty %}
+                                        {{ rate['mn_' ~ i]|number_format(2) }}
+                                        {#{{ i }}#}
+                                        {% set prev_val = rate['mn_' ~ i]|number_format(2) %}
+                                        {% set current_month = "now"|date("m") %}
+                                        {% set prevVal = prevVal|merge([
+                                                {
+                                                    'i': rate['mn_' ~ i],
+                                                }
+                                            ])
+                                        %}
+                                    {% else %}
+                                        {% set dayDate = rate.day %}
+                                        {% if dayDate <=9 %}{% set dayDate = "0"~rate.day %}{% endif %}
+
+                                        {% set dayName = (currentYear~"-"~zero~i~"-"~dayDate)|localizeddate('full', 'none', null, null, 'EEEE') %}
+                                        {% set dayNumber = (currentYear~"-"~zero~i~"-"~dayDate)|localizeddate("full", "none", null, null,"EEEE") %}
+                                        {% set current_day = "now"|date("d") %}
+                                        {% set current_month = "now"|date("m") %}
+                                        {% set current_hour = "now"|date("G") %}
+                                        {% set current_year = "now"|date("Y") %}
+                                        {% set currentDayMonth = current_year~current_month~current_day %}
+                                        {% set dayMonth = currentYear~zero~i~dayDate %}
+                                        {% set correctDateStr = currentYear~"-"~zero~i~"-"~rate.day %}
+                                        {% set correctDate = correctDateStr|date("j") %}
+                                        {% set keyManual1 = key-1 %}
+                                        {% set iManual1 = i %}
+                                        {% if (keyManual1 < 0)%}
+                                            {% set keyManual1 = 30 %}
+                                            {% set iManual1 = i-1 %}
+                                        {% endif %}
+                                        {% set keyManual2 = key-2 %}
+                                        {% set iManual2 = i %}
+                                        {% if (keyManual2 < 0)%}
+                                            {% set keyManual2 = 31+keyManual2 %}
+                                            {% set iManual2 = i-1 %}
+                                        {% endif %}
+                                        {% set iManual3 = i %}
+                                        {% set keyManual3 = key-3 %}
+                                        {% if (keyManual3 < 0)%}
+                                            {% set keyManual3 = 31+keyManual3 %}
+                                            {% set iManual3 = i-1 %}
+                                        {% endif %}
+                                        {% set iManual4 = i %}
+                                        {% set keyManual4 = key-4 %}
+                                        {% if (keyManual4 < 0)%}
+                                            {% set keyManual4 = 31+keyManual4 %}
+                                            {% set iManual4 = i-1 %}
+                                        {% endif %}
+                                        {% set keyManual5 = key-5 %}
+                                        {% set iManual5 = i %}
+                                        {% if (keyManual5 < 0)%}
+                                            {% set keyManual5 = 31+keyManual5 %}
+                                            {% set iManual5 = i-1 %}
+                                        {% endif %}
+                                        {% set keyManual6 = key-6 %}
+                                        {% set iManual6 = i %}
+                                        {% if (keyManual6 < 0)%}
+                                            {% set keyManual6 = 31+keyManual6 %}
+                                            {% set iManual6 = i-1 %}
+                                        {% endif %}
+                                        {% set keyManual7 = key-7 %}
+                                        {% set iManual7 = i %}
+                                        {% if (keyManual7 < 0)%}
+                                            {% set keyManual7 = 31+keyManual7 %}
+                                            {% set iManual7 = i-1 %}
+                                        {% endif %}
+                                             {% if dayNumber =="Sunday" or dayNumber =="Կիրակի"  %}
+                                                 <span class="text-red"> {{ 'Կիրակի'|trans }} </span>
+                                             {% elseif (correctDate == rate.day) and (dayMonth == currentDayMonth) %}
+                                                {% if current_hour > 18 %}
+                                                    {% if cba_rates[keyManual1]['mn_' ~ iManual1] is defined and cba_rates[keyManual1]['mn_' ~ iManual1] is not null %}
+                                                        {{ cba_rates[keyManual1]['mn_' ~ iManual1]|number_format(2) }}
+                                                    {% elseif cba_rates[keyManual2]['mn_' ~ iManual2] is defined and cba_rates[keyManual2]['mn_' ~ iManual2] is not null %}
+                                                        {{ cba_rates[keyManual2]['mn_' ~ iManual2]|number_format(2) }}
+                                                    {% elseif cba_rates[keyManual3]['mn_' ~ iManual3] is defined and cba_rates[keyManual3]['mn_' ~ iManual3] is not null %}
+                                                        {{ cba_rates[keyManual3]['mn_' ~ iManual3]|number_format(2) }}
+                                                    {% elseif cba_rates[keyManual4]['mn_' ~ iManual4] is defined and cba_rates[keyManual4]['mn_' ~ iManual4] is not null %}
+                                                        {{ cba_rates[keyManual4]['mn_' ~ iManual4]|number_format(2) }}
+                                                    {% elseif cba_rates[keyManual5]['mn_' ~ iManual5] is defined and cba_rates[keyManual5]['mn_' ~ iManual5] is not null %}
+                                                        {{ cba_rates[keyManual5]['mn_' ~ iManual5]|number_format(2) }}
+                                                    {% elseif cba_rates[keyManual6]['mn_' ~ iManual6] is defined and cba_rates[keyManual6]['mn_' ~ iManual6] is not null %}
+                                                        {{ cba_rates[keyManual6]['mn_' ~ iManual6]|number_format(2) }}
+                                                    {% elseif cba_rates[keyManual7]['mn_' ~ iManual7] is defined and cba_rates[keyManual7]['mn_' ~ iManual7] is not null %}
+                                                        {{ cba_rates[keyManual7]['mn_' ~ iManual7]|number_format(2) }}
+                                                    {% else %}
+                                                        <span class="text-red">-</span>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <span class="text-red">-</span>
+                                                {% endif %}
+                                             {% elseif (correctDate == rate.day) and (dayMonth < currentDayMonth) and (cba_rates[keyManual1]['mn_' ~ iManual1] is defined and cba_rates[keyManual1]['mn_' ~ iManual1] is not null ) %}
+                                                {{ cba_rates[keyManual1]['mn_' ~ iManual1]|number_format(2) }}
+                                             {% elseif (correctDate == rate.day) and (dayMonth < currentDayMonth) and (cba_rates[keyManual2]['mn_' ~ iManual2] is defined and cba_rates[keyManual2]['mn_' ~ iManual2] is not null ) %}
+                                                {{ cba_rates[keyManual2]['mn_' ~ iManual2]|number_format(2) }}
+                                             {% elseif (correctDate == rate.day) and (dayMonth < currentDayMonth) and (cba_rates[keyManual3]['mn_' ~ iManual3] is defined and cba_rates[keyManual3]['mn_' ~ iManual3] is not null ) %}
+                                                {{ cba_rates[keyManual3]['mn_' ~ iManual3]|number_format(2) }}
+                                             {% elseif (correctDate == rate.day) and (dayMonth < currentDayMonth) and (cba_rates[keyManual4]['mn_' ~ iManual4] is defined and cba_rates[keyManual4]['mn_' ~ iManual4] is not null ) %}
+                                                {{ cba_rates[keyManual4]['mn_' ~ iManual4]|number_format(2) }}
+                                             {% elseif (correctDate == rate.day) and (dayMonth < currentDayMonth) and (cba_rates[keyManual5]['mn_' ~ iManual5] is defined and cba_rates[keyManual5]['mn_' ~ iManual5] is not null ) %}
+                                                {{ cba_rates[keyManual5]['mn_' ~ iManual5]|number_format(2) }}
+                                             {% elseif (correctDate == rate.day) and (dayMonth < currentDayMonth) and (cba_rates[keyManual6]['mn_' ~ iManual6] is defined and cba_rates[keyManual6]['mn_' ~ iManual6] is not null ) %}
+                                                {{ cba_rates[keyManual6]['mn_' ~ iManual6]|number_format(2) }}
+                                             {% elseif (correctDate == rate.day) and (dayMonth < currentDayMonth) and (cba_rates[keyManual7]['mn_' ~ iManual7] is defined and cba_rates[keyManual7]['mn_' ~ iManual7] is not null ) %}
+                                                {{ cba_rates[keyManual7]['mn_' ~ iManual7]|number_format(2) }}
+                                             {% else %}
+                                                 <span class="text-red">-</span>
+                                             {% endif %}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                        {% set trendClass = {'plus': 'class=text-green', 'minus': 'class=text-red'} %}
+
+                        {% if monthSummary.mn_1.avgSum  %}
+                            {% set mn1Avg = (monthSummary.mn_1.avgSum / monthSummary.mn_1.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_2.avgSum %}
+                            {% set mn2Avg = (monthSummary.mn_2.avgSum / monthSummary.mn_2.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_3.avgSum %}
+                            {% set mn3Avg = (monthSummary.mn_3.avgSum / monthSummary.mn_3.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_4.avgSum %}
+                            {% set mn4Avg = (monthSummary.mn_4.avgSum / monthSummary.mn_4.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_5.avgSum %}
+                            {% set mn5Avg = (monthSummary.mn_5.avgSum / monthSummary.mn_5.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_6.avgSum %}
+                            {% set mn6Avg = (monthSummary.mn_6.avgSum / monthSummary.mn_6.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_7.avgSum %}
+                            {% set mn7Avg = (monthSummary.mn_7.avgSum / monthSummary.mn_7.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_8.avgSum %}
+                            {% set mn8Avg = (monthSummary.mn_8.avgSum / monthSummary.mn_8.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_9.avgSum %}
+                            {% set mn9Avg = (monthSummary.mn_9.avgSum / monthSummary.mn_9.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_10.avgSum %}
+                            {% set mn10Avg = (monthSummary.mn_10.avgSum / monthSummary.mn_10.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_11.avgSum %}
+                            {% set mn11Avg = (monthSummary.mn_11.avgSum / monthSummary.mn_11.avgCount) %}
+                        {% endif %}
+
+                        {% if monthSummary.mn_12.avgSum %}
+                            {% set mn12Avg = (monthSummary.mn_12.avgSum / monthSummary.mn_12.avgCount) %}
+                        {% endif %}
+                        {% if currentYear != 2000 %}
+                        <tr>
+                            <td style="width: 140px;">{% trans %}Նվազագույնը{% endtrans %}</td>
+
+                            <td>{{ monthSummary.mn_1.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_2.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_3.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_4.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_5.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_6.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_7.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_8.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_9.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_10.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_11.min|number_format(2) }}</td>
+
+                            <td>{{ monthSummary.mn_12.min|number_format(2) }}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{% trans %}Առավելագույնը{% endtrans %}</td>
+
+                            {% if monthSummary.mn_1.max %}
+                                <td>{{ monthSummary.mn_1.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_2.max %}
+                                <td>{{ monthSummary.mn_2.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_3.max %}
+                                <td>{{ monthSummary.mn_3.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_4.max %}
+                                <td>{{ monthSummary.mn_4.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_5.max %}
+                                <td>{{ monthSummary.mn_5.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_6.max %}
+                                <td>{{ monthSummary.mn_6.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_7.max %}
+                                <td>{{ monthSummary.mn_7.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_8.max %}
+                                <td>{{ monthSummary.mn_8.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_9.max %}
+                                <td>{{ monthSummary.mn_9.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_10.max %}
+                                <td>{{ monthSummary.mn_10.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_11.max %}
+                                <td>{{ monthSummary.mn_11.max|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if monthSummary.mn_12.max %}
+                                <td>{{ monthSummary.mn_12.max|number_format(2) }}</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>{% trans %}Միջինը{% endtrans %}</td>
+                            {% if mn1Avg is defined %}
+                                <td>{{ mn1Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn2Avg is defined %}
+                                <td>{{ mn2Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn3Avg is defined %}
+                                <td>{{ mn3Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn4Avg is defined %}
+                                <td>{{ mn4Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn5Avg is defined %}
+                                <td>{{ mn5Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn6Avg is defined %}
+                                <td>{{ mn6Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn7Avg is defined %}
+                                <td>{{ mn7Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn8Avg is defined %}
+                                <td>{{ mn8Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn9Avg is defined %}
+                                <td>{{ mn9Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn10Avg is defined %}
+                                <td>{{ mn10Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn11Avg is defined %}
+                                <td>{{ mn11Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                            {% if mn12Avg is defined %}
+                                <td>{{ mn12Avg|number_format(2) }}</td>
+                            {% endif %}
+
+                        </tr>
+                        <tr>
+                            <td>{% trans %}Ամսեկան տատանումը{% endtrans %}</td>
+                            <td> - </td>
+
+                            {% if mn2Avg is defined %}
+                                <td {% if (mn2Avg - mn1Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn2Avg - mn1Avg) > 0 %}+{% endif %}{{ (mn2Avg - mn1Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn3Avg is defined %}
+                                <td {% if (mn3Avg - mn2Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn3Avg - mn2Avg) > 0 %}+{% endif %}{{ (mn3Avg - mn2Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn4Avg is defined %}
+                                <td {% if (mn4Avg - mn3Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn4Avg - mn3Avg) > 0 %}+{% endif %}{{ (mn4Avg - mn3Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn5Avg is defined %}
+                                <td {% if (mn5Avg - mn4Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn5Avg - mn4Avg) > 0 %}+{% endif %}{{ (mn5Avg - mn4Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn6Avg is defined %}
+                                <td {% if (mn6Avg - mn5Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn6Avg - mn5Avg) > 0 %}+{% endif %}{{ (mn6Avg - mn5Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn7Avg is defined %}
+                                <td {% if (mn7Avg - mn6Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn7Avg - mn6Avg) > 0 %}+{% endif %}{{ (mn7Avg - mn6Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn8Avg is defined %}
+                                <td {% if (mn8Avg - mn7Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn8Avg - mn7Avg) > 0 %}+{% endif %}{{ (mn8Avg - mn7Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn9Avg is defined %}
+                                <td {% if (mn9Avg - mn8Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn9Avg - mn8Avg) > 0 %}+{% endif %}{{ (mn9Avg - mn8Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn10Avg is defined %}
+                                <td {% if (mn10Avg - mn9Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn10Avg - mn9Avg) > 0 %}+{% endif %}{{ (mn10Avg - mn9Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn11Avg is defined %}
+                                <td {% if (mn11Avg - mn10Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn11Avg - mn10Avg) > 0 %}+{% endif %}{{ (mn11Avg - mn10Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+
+                            {% if mn12Avg is defined %}
+                                <td {% if (mn12Avg - mn11Avg) < 0 %}{{trendClass.minus}}{% else %}{{trendClass.plus}}{% endif %}>
+                                    {% if (mn12Avg - mn11Avg) > 0 %}+{% endif %}{{ (mn12Avg - mn11Avg)|number_format(2) }}
+                                </td>
+                            {% endif %}
+                        </tr>
+                        {% endif %}
+                    </tfoot>
+                </table>
+                {% endif %}
+            </div>
+            <div class="gap-25"></div>
+            <div class="chart"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script src="{{asset('js/highcharts/highstock.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/highcharts/modules/exporting.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/icheck.min.js')}}" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(function(){
+
+            $.getJSON('{{ path('data_cba_chart', {'year': currentYear, 'currency': currentCurrency}) }}', function (data) {
+                $('.chart').highcharts('StockChart', {
+                    rangeSelector : {
+                        selected : 1
+                    },
+                    title : {
+                        text : '{{ currentCurrency|upper }} {% trans %}Արժույթի տատանումները{% endtrans %} {{ currentYear }} {% trans %}թվականի կտրվածքով{% endtrans %}'
+                    },
+                    rangeSelector: {
+                        enabled: false
+                    },
+                    navigator: {
+                        enabled: false
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        labels: {
+                            format: '{value:%d-%m-%Y}',
+                            rotation: 45,
+                            align: 'left'
+                        }
+                    },
+                    exporting: false,
+                    series : [{
+                        name : '{{ currentCurrency|upper }}',
+                        data : data,
+                        tooltip: {
+                            valueDecimals: 2
+                        }
+                    }]
+                });
+            });
+
+            var currentCurrency = "{{ currentCurrency|lower }}";
+            var currentYear = "{{ currentYear }}";
+
+            var selectCurrency = $('select[name="cbaChangeCurrency"]');
+            var selectYear = $('select[name="cbaChangeYear"]');
+
+            // Change currency
+            selectCurrency.on('change', function(){
+                var currencyValue = $(this).val();
+                window.location = "/{{ app.request.attributes.get('_locale') }}/central-bank/"+currencyValue+"/"+currentYear;
+            });
+
+            // Change year
+            selectYear.on('change', function(){
+                var yearValue = $(this).val();
+                window.location = "/{{ app.request.attributes.get('_locale') }}/central-bank/"+currentCurrency+"/"+yearValue;
+            });
+
+        });
+    </script>
+    {{ parent() }}
+{% endblock %}

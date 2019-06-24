@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2017-04-13T15:41:24Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="baad40b9131fbf4bdbbbe67f4caddeee77eeaec0" resname="Swift փոխանցումներ">
+        <source>Swift փոխանցումներ</source>
+        <target state="new">Swift Transfers</target>
+        <jms:reference-file line="9">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="70ca5a8c779350c187ee0336e209d81d6fe900ce" resname="Ավանդային Հաշվիչ">
+        <source>Ավանդային Հաշվիչ</source>
+        <target state="new">Deposit Calculator</target>
+        <jms:reference-file line="56">/../../../../../../../.././app/Resources/views/elements/header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7ba80e73211d9ef6303e879a0c30efa2ce0d56fe" resname="Արագ Դրամական Փոխանցումներ">
+        <source>Արագ Դրամական Փոխանցումներ</source>
+        <target state="new">Fast Money Transfers</target>
+        <jms:reference-file line="8">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ead6a1928b64512d073d422cdbd756ca8e25aa8c" resname="Գլխավոր">
+        <source>Գլխավոր</source>
+        <target state="new">Home</target>
+        <jms:reference-file line="9">/../../../../../../../.././app/Resources/views/elements/footer.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../../../../../../../.././app/Resources/views/elements/header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fb457f8b58fc34dd102d6a942deb32ffd594c586" resname="Էլ․դրամապանակներ">
+        <source>Էլ․դրամապանակներ</source>
+        <target state="new">E-wallets</target>
+        <jms:reference-file line="10">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5bf100a95c8ed47af683f8bde18a49c5edb96c7e" resname="Կապ">
+        <source>Կապ</source>
+        <target state="new">Contact</target>
+        <jms:reference-file line="11">/../../../../../../../.././app/Resources/views/elements/footer.html.twig</jms:reference-file>
+        <jms:reference-file line="20">/../../../../../../../.././app/Resources/views/elements/header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="cb0ba117a353ee619bfff72990988b23ff269e82" resname="Կ․Բ. Փոխարժեքներ">
+        <source>Կ․Բ. Փոխարժեքներ</source>
+        <target state="new">CBA Rates</target>
+        <jms:reference-file line="3">/../../../../../../../.././app/Resources/views/elements/right_bar.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f0424e122af159284e47d17fc69a75f42cec0274" resname="Մեր մասին">
+        <source>Մեր մասին</source>
+        <target state="new">About</target>
+        <jms:reference-file line="10">/../../../../../../../.././app/Resources/views/elements/footer.html.twig</jms:reference-file>
+        <jms:reference-file line="19">/../../../../../../../.././app/Resources/views/elements/header.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="eae21df380167e458af3e855304708b7d301c683" resname="Վարկային Հաշվիչ">
+        <source>Վարկային Հաշվիչ</source>
+        <target state="new">Loan Calculator</target>
+        <jms:reference-file line="55">/../../../../../../../.././app/Resources/views/elements/header.html.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

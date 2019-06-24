@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{%
+set metaParams = {
+'title': news.newsTitle,
+'description': news.newsMetaDescription,
+'keywords': news.newsMetaKeywords,
+'ogImage': news.newsOgImage
+}
+%}
+
+{% block meta %}
+    {% include 'elements/meta.html.twig' with metaParams %}
+
+
+{% endblock %}
+{% block title %}{{ news.newsTitle }} | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a2415877f042fce"></script>
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h2>{{ news.newsTitle }}</h2>
+    <p>{{ news.newsDate|date('d.m.Y') }}</p>
+    {% if news.newsGallery is not empty or news.newsGallery is not null %}
+        <div class="fotorama"
+             data-width="100%"
+             data-maxheight="550"
+             data-autoplay="true"
+             data-keyboard="true"
+             {#data-nav="thumbs"#}
+        >
+            {%  for image in news.newsGallery|json_decode %}
+                <img src="{{ asset(image) }}">
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="gap-20">
+        {{ news.newsText|raw }}
+    </div>
+    <div class="addthis_inline_share_toolbox"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,52 @@
+<div class="right-bar__widget">
+    <ul class="right-bar__menu">
+        <li><b><a href="{{ path('bank_cba') }}">{% trans from "navigation" %}Կենտրոնական բանկ{% endtrans %}</a></b></li>
+        <li><b><a href="{{ path('bank_banks_branches') }}">{% trans from "messages" %}Բանկեր և մասնաճյուղեր{% endtrans %}</a></b></li>
+        <li><b><a href="{{ path('bank_atms') }}">{% trans from "messages" %}Բանկոմատներ{% endtrans %}</a></b></li>
+        <li><b><a href="{{ path('credit_company_list') }}">{% trans from "messages" %}Վարկային Կազմակերպություններ{% endtrans %}</a></b></li>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <li><b><a href="{{ path('bank_transfers') }}">{% trans from "navigation" %}Արագ Դրամական Փոխանցումներ{% endtrans %}</a></b></li>
+        <li><b><a href="{{ path('bank_transfers_swift') }}">{% trans from "navigation" %}Swift փոխանցումներ{% endtrans %}</a></b></li>
+        <li><b><a href="{{ path('bank_ewallet') }}">{% trans from "navigation" %}Էլ․դրամապանակներ{% endtrans %}</a></b></li>
+        {% endif %}
+    </ul>
+</div>
+<div class="right-bar__widget ">
+    <h3 class="right-bar__widget-title">{{ 'Կ.Բ. Փոխարժեքներ'|trans }}</h3>
+    <table class="right-bar__widget-quotes cba-currencies">
+        <thead>
+            <tr>
+                <td>{{ 'Արժ.'|trans }}</td>
+                <td>{{ 'Թարմացում'|trans }}</td>
+                <td>{{ 'Արժեք'|trans }}</td>
+                <td>{{ 'Փոփոխություն'|trans }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{ render(controller('AppBundle:Data:cbaRatesWidget')) }}
+        </tbody>
+    </table>
+    <a href="{{ path('bank_cba') }}" class="right-bar__widget-link">{{ 'Դիտել բոլորը'|trans }}</a>
+</div>
+<div class="right-bar__widget ">
+    <h3 class="right-bar__widget-title">{{ 'Քվոտաներ'|trans }}</h3>
+    <table class="right-bar__widget-quotes market-quotes">
+        <thead>
+            <tr>
+                <td>{{ 'Նիշ'|trans }}</td>
+                <td>{{ 'Թարմացում'|trans }}</td>
+                <td>{{ 'Արժեք'|trans }}</td>
+                <td>{{ 'Փոփոխություն'|trans }}</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+{% if false %}
+<div class="right-bar__widget">
+    <h3 class="right-bar__widget-title">{% trans %}Գործընկերներ{% endtrans %}</h3>
+    <a href="#">
+        <img src="{{asset('img/ads/ashib-ads.jpg')}}" class="img-responsive">
+    </a>
+</div>
+{% endif %}

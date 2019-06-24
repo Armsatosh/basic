@@ -1,0 +1,13 @@
+{% extends 'base.html.twig'  %}
+
+{% block title %}403 - {{ 'Մուտքն արգելված է'|trans }} | {{ parent() }} {% endblock %}
+
+{% block body %}
+    <h2 class="content__title">{{ 'Մուտքն արգելված է'|trans }}</h2>
+    <div class="gap-20"></div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h2>{{ 'Մուտքն արգելված է'|trans }}</h2>
+        </div>
+    </div>
+{% endblock %}
